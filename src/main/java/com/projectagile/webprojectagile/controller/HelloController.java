@@ -9,31 +9,28 @@ import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
-@Controller
+@RestController
 @RequestMapping(path = "/test")
 public class HelloController {
 
     @Autowired
     TestClassServiceImpl testClassService;
 
-    //Test change
+    @RequestMapping(path = "/hello", method = RequestMethod.GET)
+
+
     @GetMapping("/hello")
-    @ResponseBody
     public String helloTest(){
         System.out.println("helloTest called");
         return "Hello world!";
     }
 
     @GetMapping("/testadd/{text}")
-    @ResponseBody
     public BaseResVO testAddTestClass(@PathVariable String text){
         TestClass testClass = testClassService.addTestClass(new TestClass(text));
         if(testClass != null){
@@ -44,7 +41,6 @@ public class HelloController {
     }
 
     @GetMapping("/testfind/{id}")
-    @ResponseBody
     public BaseResVO testFindTestClass(@PathVariable int id){
         TestClass testClass = testClassService.findTestClassById(id);
         if(testClass != null){
@@ -55,7 +51,6 @@ public class HelloController {
     }
 
     @GetMapping("/testfindall")
-    @ResponseBody
     public BaseResVO testFindAllTestClass(){
         List<TestClass> listTestClass = testClassService.findAllTestClass();
         if(listTestClass != null){
