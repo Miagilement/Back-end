@@ -6,6 +6,7 @@ import java.util.UUID;
 
 /**
  * Basic class for request VO
+ * Pour chaque requête il y a un numéro et un timestamp
  */
 @Data
 public class BaseReqVO {
