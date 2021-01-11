@@ -1,6 +1,5 @@
 package com.projectagile.webprojectagile.vo.req;
 
-import jdk.nashorn.internal.objects.annotations.Constructor;
 import lombok.Data;
 
 import java.util.UUID;

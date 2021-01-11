@@ -9,16 +9,14 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Entity
-@Table(name = "TESTCLASS")
+@Table(name = "testClass")
 public class TestClass {
 
     @Id
     @GeneratedValue
-    @Column(name = "id")
     private int id;
 
     @NonNull
-    @Column(name = "text")
     private String text;
 
     public TestClass(String text) {
