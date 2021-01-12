@@ -5,5 +5,5 @@ import com.projectagile.webprojectagile.entity.Enterprise;
 import org.springframework.data.repository.CrudRepository;
 
 
-public interface ContactDao extends CrudRepository<Contact, String> {
+public interface ContactDao extends CrudRepository<Contact, Integer> {
 }

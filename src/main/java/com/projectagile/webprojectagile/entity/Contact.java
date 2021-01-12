@@ -12,7 +12,7 @@ public class Contact {
 
     @Id
     @GeneratedValue
-    private String id;
+    private int id;
 
     private String nameContact;
     private String email;

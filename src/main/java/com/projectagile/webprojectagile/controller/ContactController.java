@@ -9,10 +9,7 @@ import com.projectagile.webprojectagile.vo.req.ContactReqVO;
 import com.projectagile.webprojectagile.vo.req.EnterpriseRegisterReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,4 +33,5 @@ public class ContactController {
             return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
         }
     }
+
 }

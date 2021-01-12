@@ -1,8 +1,6 @@
 package com.projectagile.webprojectagile.controller;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.projectagile.webprojectagile.entity.Enterprise;
-import com.projectagile.webprojectagile.entity.TestClass;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.EnterpriseService;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
@@ -24,7 +22,7 @@ public class EnterpriseRegisterController {
     @PostMapping("/register")
     public BaseResVO enterpriseRegister(@RequestBody EnterpriseRegisterReqVO enterpriseRegisterReqVO){
         System.out.println(enterpriseRegisterReqVO.toString());
-        Enterprise enterprise = enterpriseService.insertEnterprise(enterpriseRegisterReqVO.toEnterprise());
+        Enterprise enterprise = enterpriseService.insertEnterprise(enterpriseRegisterReqVO.getEnterprise());
         //TODO Verify data format
         if(enterprise != null){
             return ResultVOUtils.success(enterprise);
