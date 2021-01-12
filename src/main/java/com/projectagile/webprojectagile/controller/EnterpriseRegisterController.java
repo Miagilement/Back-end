@@ -21,7 +21,8 @@ public class EnterpriseRegisterController {
 
     @PostMapping("/register")
     public BaseResVO enterpriseRegister(@RequestBody EnterpriseRegisterReqVO enterpriseRegisterReqVO){
-        System.out.println(enterpriseRegisterReqVO.toString());
+
+        System.out.println(enterpriseRegisterReqVO.getTimeStamp());
         Enterprise enterprise = enterpriseService.insertEnterprise(enterpriseRegisterReqVO.getEnterprise());
         //TODO Verify data format
         if(enterprise != null){
