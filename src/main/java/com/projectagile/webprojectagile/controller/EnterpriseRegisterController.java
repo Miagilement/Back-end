@@ -34,14 +34,5 @@ public class EnterpriseRegisterController {
         }
     }
 
-    @PostMapping("/find-all-enterprise")
-    public BaseResVO findAllEnterprise(){
-        List<Enterprise> enterpriseList = enterpriseService.findAllEnterprise();
-        //TODO Verify data format
-        if(enterpriseList != null){
-            return ResultVOUtils.success(enterpriseList);
-        } else {
-            return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
-        }
-    }
+
 }
