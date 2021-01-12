@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/user/enterprise")
 public class EnterpriseRegisterController {
@@ -27,6 +29,17 @@ public class EnterpriseRegisterController {
         //TODO Verify data format
         if(enterprise != null){
             return ResultVOUtils.success(enterprise);
+        } else {
+            return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
+        }
+    }
+
+    @PostMapping("/find-all-enterprise")
+    public BaseResVO findAllEnterprise(){
+        List<Enterprise> enterpriseList = enterpriseService.findAllEnterprise();
+        //TODO Verify data format
+        if(enterpriseList != null){
+            return ResultVOUtils.success(enterpriseList);
         } else {
             return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
         }
