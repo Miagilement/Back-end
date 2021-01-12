@@ -3,7 +3,9 @@
 ## [1\. Account services](#1)
 #### [1.1\. Enterprise register](#1.1)
 #### [1.2\. Add contact](#1.2)
-
+## [2\. Infomation services](#2)
+#### [2.1\. Find all enterprise information](#2.1)
+#### [2.2\. Find enterprise information by uid](#2.2)
 
 
 <h1 id="1">1. Account services</h1>
@@ -24,7 +26,7 @@
 ### Request parameter
 |Parameter|Required|Type|Explain|
 |:-----  |:-------|:-----|-----                               |
-|nameEnterprise    |yes(or no if use email)    |string|enterprise|
+|nameEnterprise    |yes    |string|enterprise|
 |password    |yes    |string   |Password|
 |groupAffiliated    |yes    |string  |group name |
 |secterActivity    |yes    |string  |secter activity of enterprise|
@@ -63,7 +65,7 @@ BaseResVO
 
 
 
-Example response of succesful request
+### Example response of succesful request
 
 ``` javascript
 {
@@ -113,14 +115,8 @@ Example response of succesful request
 ### Request parameter
 |Parameter|Required|Type|Explain|
 |:-----  |:-------|:-----|-----                               |
-|nameContact    |yes(or no if use email)    |string|enterprise                          |
-|email    |yes    |string   |Password|
-|enterpriseUid    |yes    |string  |group name |
+|uid    |yes   |string|uid of the enterprise                          |
 
-### Request class
-``` javascript
-ContactReqVO
-```
 
 ### Response class
 ``` javascript
@@ -141,7 +137,7 @@ BaseResVO
 
 
 
-Example response of succesful request
+### Example response of succesful request
 
 ``` javascript
 {
@@ -161,6 +157,158 @@ Example response of succesful request
             "enterpriseUid": "xxx"
         }
     ]
+}
+```
+
+### Example response of failing request
+``` javascript
+{
+    "code":2,
+    "message":"Wrong parameter",
+    "data":
+    {
+        null
+    }
+}
+```
+<h1 id="2">2. Information services</h1>
+<h2 id="2.1">2.1 Find all enterprise information</h2>
+
+### Api function
+> Allow to get all information of the enterprise by its uid
+
+### URL
+> ../info/enterprise/find-by-id/{uid}
+
+### Support format
+> JSON
+
+### HTTP request methode
+> POST
+
+### Response class
+``` javascript
+BaseResVO
+```
+
+
+### Example response of succesful request
+
+``` javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": [
+        {
+            "uid": "239ef258-d8d9-4ca0-8ae3-f6b1f5672b4a",
+            "nameEnterprise": "titi.toto",
+            "password": "123456",
+            "groupAffiliated": "Atos",
+            "sectorActivity": "informatique",
+            "region": "Girond",
+            "turnOver": "10M",
+            "description": "Atos of the region Gironde",
+            "siret": "dkjg4634634634"
+        },
+        {
+            "uid": "09e0a9ac-bfd6-4661-9726-d7be433b9a6e",
+            "nameEnterprise": "titi.toto",
+            "password": "123456",
+            "groupAffiliated": "Atos",
+            "sectorActivity": "informatique",
+            "region": "Girond",
+            "turnOver": "10M",
+            "description": "Atos of the region Gironde",
+            "siret": "dkjg4634634634"
+        },
+        {
+            "uid": "7459a681-0250-4bb7-ad1c-b8156641c720",
+            "nameEnterprise": "titi.toto",
+            "password": "123456",
+            "groupAffiliated": "Atos",
+            "sectorActivity": "informatique",
+            "region": "Girond",
+            "turnOver": "10M",
+            "description": "Atos of the region Gironde",
+            "siret": "dkjg4634634634"
+        },
+        {
+            "uid": "787c43a7-da26-4537-b355-3161c547c725",
+            "nameEnterprise": "titi.toto",
+            "password": "123456",
+            "groupAffiliated": "Atos",
+            "sectorActivity": "informatique",
+            "region": "Girond",
+            "turnOver": "10M",
+            "description": "Atos of the region Gironde",
+            "siret": "dkjg4634634634"
+        }
+    ]
+}
+```
+
+### Example response of failing request
+``` javascript
+{
+    "code":2,
+    "message":"Wrong parameter",
+    "data":
+    {
+        null
+    }
+}
+```
+
+<h2 id="2.2">2.2 Find enterprise information by uid</h2>
+
+### Api function
+> Allow to get all information of the enterprise by its uid
+
+### URL
+> ../info/enterprise/find-by-id/{uid}
+
+### Support format
+> RESTful
+
+### HTTP request methode
+> POST
+
+### Request parameter
+|Parameter|Required|Type|Explain|
+|:-----  |:-------|:-----|-----                               |
+|uid   |yes   |string|uid of enterprise                         |
+
+
+
+### Response class
+``` javascript
+BaseResVO
+```
+
+### Example request
+
+``` javascript
+../info/enterprise/find-by-id/239ef258-d8d9-4ca0-8ae3-f6b1f5672b4a
+```
+
+
+### Example response of succesful request
+
+``` javascript
+{
+    "code": 0,
+    "message": "success",
+    "data": {
+        "uid": "239ef258-d8d9-4ca0-8ae3-f6b1f5672b4a",
+        "nameEnterprise": "titi.toto",
+        "password": "123456",
+        "groupAffiliated": "Atos",
+        "sectorActivity": "informatique",
+        "region": "Girond",
+        "turnOver": "10M",
+        "description": "Atos of the region Gironde",
+        "siret": "dkjg4634634634"
+    }
 }
 ```
 
