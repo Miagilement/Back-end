@@ -47,15 +47,16 @@ BaseResVO
 
 ``` javascript
 {
-    "enterprise":{
-    "nameEnterprise":"titi.toto",
-    "password":"123456",
-    "groupAffiliated":"Atos",
-    "sectorActivity":"informatique",
-    "region":"Girond",
-    "turnOver":"10M",
-    "description":"Atos of the region Gironde",
-    "siret":"dkjg4634634634"
+    "enterprise":
+    {
+        "nameEnterprise":"titi.toto",
+        "password":"123456",
+        "groupAffiliated":"Atos",
+        "sectorActivity":"informatique",
+        "region":"Girond",
+        "turnOver":"10M",
+        "description":"Atos of the region Gironde",
+        "siret":"dkjg4634634634"
     }
 }
 ```

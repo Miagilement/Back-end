@@ -8,5 +8,5 @@ import java.util.List;
 public interface EnterpriseService {
     Enterprise insertEnterprise(Enterprise enterprise);
     List<Enterprise> findAllEnterprise();
-
+    Enterprise findById(String uid);
 }
