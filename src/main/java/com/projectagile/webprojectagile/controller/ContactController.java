@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user/enterprise/contact")
-
+//test for vscode
 public class ContactController {
 
     @Autowired

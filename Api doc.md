@@ -24,7 +24,7 @@
 ### Request parameter
 |Parameter|Required|Type|Explain|
 |:-----  |:-------|:-----|-----                               |
-|nameEnterprise    |yes(or no if use email)    |string|enterprise                          |
+|nameEnterprise    |yes(or no if use email)    |string|enterprise|
 |password    |yes    |string   |Password|
 |groupAffiliated    |yes    |string  |group name |
 |secterActivity    |yes    |string  |secter activity of enterprise|
