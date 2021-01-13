@@ -28,4 +28,10 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     public Enterprise findById(String uid) {
         return enterpriseDao.findById(uid).get();
     }
+
+    @Override
+    public boolean isExist(Enterprise enterprise) {
+        Enterprise enterpriseExist = enterpriseDao.findBySiret(enterprise.getSiret());
+        return enterpriseExist != null;
+    }
 }

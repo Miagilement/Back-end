@@ -35,6 +35,22 @@ public class ResultVOUtils {
         return baseResVO;
     }
 
+    /**
+     * Return customized error with data
+     * @param code
+     * @param message
+     * @param data
+     * @return
+     */
+    public static BaseResVO error(Integer code, String message, Object data) {
+        BaseResVO<Object> baseResVO = new BaseResVO<>();
+        baseResVO.setCode(code);
+        baseResVO.setMessage(message);
+        baseResVO.setData(data);
+        return baseResVO;
+    }
+
+
 
     /**
      * Return defined error
@@ -45,6 +61,9 @@ public class ResultVOUtils {
         return error(resultEnum.getCode(), resultEnum.getMessage());
     }
 
+    public static BaseResVO error(ResultEnum resultEnum, Object data) {
+        return error(resultEnum.getCode(), resultEnum.getMessage(), data);
+    }
 
     /**
      * Return defined error with customized message

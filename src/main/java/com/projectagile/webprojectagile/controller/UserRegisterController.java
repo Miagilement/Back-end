@@ -1,6 +1,5 @@
 package com.projectagile.webprojectagile.controller;
 
-import com.projectagile.webprojectagile.entity.Enterprise;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.EnterpriseService;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
@@ -12,27 +11,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import javax.validation.Valid;
+
 
 @RestController
-@RequestMapping(value = "/user/enterprise")
-public class EnterpriseRegisterController {
+@RequestMapping(value = "/user")
+public class UserRegisterController {
 
     @Autowired
     EnterpriseService enterpriseService;
 
-    @PostMapping("/register")
-    public BaseResVO enterpriseRegister(@RequestBody EnterpriseRegisterReqVO enterpriseRegisterReqVO){
-
-        System.out.println(enterpriseRegisterReqVO.getTimeStamp());
-        Enterprise enterprise = enterpriseService.insertEnterprise(enterpriseRegisterReqVO.getEnterprise());
-        //TODO Verify data format
-        if(enterprise != null){
-            return ResultVOUtils.success(enterprise);
+    //Pour les utilisateurs de l'entreprise
+    @PostMapping("/enterprise/register")
+    public BaseResVO enterpriseRegister(@Valid @RequestBody EnterpriseRegisterReqVO enterpriseRegisterReqVO) {
+        if(enterpriseService.isExist(enterpriseRegisterReqVO.getEnterprise())){
+            return ResultVOUtils.error(ResultEnum.DATA_REPEAT);
         } else {
-            return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
+            return ResultVOUtils.success(enterpriseService.insertEnterprise(enterpriseRegisterReqVO.getEnterprise()));
         }
     }
-
-
 }

@@ -9,4 +9,5 @@ public interface EnterpriseService {
     Enterprise insertEnterprise(Enterprise enterprise);
     List<Enterprise> findAllEnterprise();
     Enterprise findById(String uid);
+    boolean isExist(Enterprise enterprise);
 }

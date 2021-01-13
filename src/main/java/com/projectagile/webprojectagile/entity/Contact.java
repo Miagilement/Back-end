@@ -2,11 +2,14 @@ package com.projectagile.webprojectagile.entity;
 
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "Contact")
+@Table
 public class Contact {
 
     @Id

@@ -1,16 +1,16 @@
 package com.projectagile.webprojectagile.controller;
 
 
-
 import com.projectagile.webprojectagile.entity.TestClass;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.impl.TestClassServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 
@@ -57,6 +57,22 @@ public class HelloController {
             return ResultVOUtils.success(listTestClass);
         } else {
             return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
+        }
+    }
+
+    @PostMapping("/testvalid")
+    public BaseResVO testValid(@Valid @RequestBody TestClass testClass, BindingResult bindingResult){
+        System.out.println(bindingResult.hasErrors());
+        System.out.println(testClass.getText());
+        if (bindingResult.hasErrors()) {
+            return ResultVOUtils.error(2, "Wrong parameter", bindingResult.getAllErrors());
+        } else {
+            TestClass testClass1 = testClassService.addTestClass(testClass);
+            if (testClass1 != null) {
+                return ResultVOUtils.success(testClass1);
+            } else {
+                return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
+            }
         }
     }
 }

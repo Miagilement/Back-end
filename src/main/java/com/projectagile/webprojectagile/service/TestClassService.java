@@ -8,4 +8,5 @@ public interface TestClassService {
     TestClass addTestClass(TestClass testClass);
     TestClass findTestClassById(int id);
     List<TestClass> findAllTestClass();
+
 }

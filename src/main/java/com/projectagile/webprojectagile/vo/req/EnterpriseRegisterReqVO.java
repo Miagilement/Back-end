@@ -1,10 +1,15 @@
 package com.projectagile.webprojectagile.vo.req;
 
 import com.projectagile.webprojectagile.entity.Enterprise;
-import com.projectagile.webprojectagile.vo.req.BaseReqVO;
 import lombok.Data;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 @Data
 public class EnterpriseRegisterReqVO extends BaseReqVO {
-    Enterprise enterprise;
+
+    @Valid
+    @NotNull
+    private Enterprise enterprise;
 }

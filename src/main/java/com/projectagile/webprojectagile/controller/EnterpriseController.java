@@ -2,7 +2,6 @@ package com.projectagile.webprojectagile.controller;
 
 import com.projectagile.webprojectagile.entity.Enterprise;
 import com.projectagile.webprojectagile.enums.ResultEnum;
-import com.projectagile.webprojectagile.service.EnterpriseService;
 import com.projectagile.webprojectagile.service.impl.EnterpriseServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
@@ -24,7 +23,6 @@ public class EnterpriseController {
     @PostMapping("/find-all-enterprise")
     public BaseResVO findAllEnterprise(){
         List<Enterprise> enterpriseList = enterpriseService.findAllEnterprise();
-        //TODO Verify data format
         if(enterpriseList != null){
             return ResultVOUtils.success(enterpriseList);
         } else {

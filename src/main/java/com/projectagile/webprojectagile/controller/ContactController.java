@@ -1,15 +1,16 @@
 package com.projectagile.webprojectagile.controller;
 
 import com.projectagile.webprojectagile.entity.Contact;
-import com.projectagile.webprojectagile.entity.Enterprise;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.ContactService;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.ContactReqVO;
-import com.projectagile.webprojectagile.vo.req.EnterpriseRegisterReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -22,9 +23,9 @@ public class ContactController {
     ContactService contactService;
 
     @PostMapping("/addcontact")
-    public BaseResVO addcontact (@RequestBody ContactReqVO addcontactReqVO){
-        System.out.println(addcontactReqVO.toString());
-        List<Contact> contacts = contactService.insertContact(addcontactReqVO.getContacts());
+    public BaseResVO addContact (@RequestBody ContactReqVO addContactReqVO){
+        System.out.println(addContactReqVO.toString());
+        List<Contact> contacts = contactService.insertContact(addContactReqVO.getContacts());
 
         //TODO Verify data format
         if(contacts != null){
