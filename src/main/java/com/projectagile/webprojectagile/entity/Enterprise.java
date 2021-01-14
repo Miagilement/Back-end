@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.UUID;
@@ -15,6 +16,10 @@ public class Enterprise {
 
     @Id
     private String uid;
+
+//    @Email(message = "Le email de contact doit respecter le format d'un eamil")
+//    @NotNull(message = "Le mail de l'entreprise ne doit pas être vide")
+//    private String email;
 
     @NotNull(message = "Le nom de l'entreprise ne doit pas être vide")
     private String nameEnterprise;

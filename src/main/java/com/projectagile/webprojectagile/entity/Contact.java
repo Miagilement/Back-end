@@ -20,7 +20,7 @@ public class Contact {
     private String nameContact;
 
     @NotNull(message = "Le email de contact ne doit pas être vide")
-    @Email(message = "Le email de contact doit respecter le format d'eamil")
+    @Email(message = "Le email de contact doit respecter le format d'un eamil")
     private String email;
 
     @Valid
