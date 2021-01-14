@@ -18,8 +18,22 @@ public class ContactServiceImpl implements ContactService {
     ContactDao contactDao;
 
     @Override
-    public List<Contact> insertContact(List<Contact> contacts) {
+    public List<Contact> updateContact(List<Contact> contacts) {
         return (List<Contact>) contactDao.saveAll(contacts);
     }
 
+    @Override
+    public List<Contact> getAllContact(String uid) {
+        return (List<Contact>) contactDao.findAllContactByEnterprise(uid);
+    }
+
+    @Override
+    public void deleteContact(int id) {
+        contactDao.deleteById(id);
+    }
+
+    @Override
+    public void deleteAllContact(String uid) {
+        contactDao.deleteContactsByEnterprise_Uid(uid);
+    }
 }

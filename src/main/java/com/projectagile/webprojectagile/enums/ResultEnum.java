@@ -13,7 +13,6 @@ public enum ResultEnum {
     DATA_NOT(4, "No data related"),
     DATA_CHANGE(5, "Data no changed"),
     DATA_REPEAT(6, "Data is already existed"),
-
     ;
 
     private Integer code;

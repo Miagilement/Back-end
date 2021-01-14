@@ -115,7 +115,9 @@ BaseResVO
 ### Request parameter
 |Parameter|Required|Type|Explain|
 |:-----  |:-------|:-----|-----                               |
-|uid    |yes   |string|uid of the enterprise                          |
+|nameContact    |yes   |string|name of the contact                        |
+|email    |yes   |string|email of the contact                           |
+|enterprise    |yes   |string|uid of the enterprise                          |
 
 
 ### Response class
@@ -127,11 +129,40 @@ BaseResVO
 
 ``` javascript
 {
-    "contacts":
-    [
-        {"nameContact":"coucou","email":"coucou@gmail.com","enterpriseUid":"xxx"},
-        {"nameContact":"coucou","email":"coucou@gmail.com","enterpriseUid":"xxx"}
-    ]
+    "contacts":[
+    {
+        "nameContact":"coucou",
+        "email":"coucou@gmail.com",
+        "enterprise":
+        {
+            "uid": "65e720ad-916c-426e-aa30-27453a6c102f",
+            "nameEnterprise": "titi.toto",
+            "password": "123456",
+            "groupAffiliated": "Atos",
+            "sectorActivity": "informatique",
+            "region": "Girond",
+            "turnOver": "0",
+            "description": "Atos of the region Gironde",
+            "siret": "12345678901234"
+        }
+    },
+    {
+        "nameContact":"coucou",
+        "email":"coucou@gmail.com",
+        "enterprise":
+        {
+            "uid": "65e720ad-916c-426e-aa30-27453a6c102f",
+            "nameEnterprise": "titi.toto",
+            "password": "123456",
+            "groupAffiliated": "Atos",
+            "sectorActivity": "informatique",
+            "region": "Girond",
+            "turnOver": "0",
+            "description": "Atos of the region Gironde",
+            "siret": "12345678901234"
+        }
+    }
+]
 }
 ```
 
@@ -145,16 +176,36 @@ BaseResVO
     "message": "success",
     "data": [
         {
-            "id": 13,
+            "id": 33,
             "nameContact": "coucou",
             "email": "coucou@gmail.com",
-            "enterpriseUid": "xxx"
+            "enterprise": {
+                "uid": "65e720ad-916c-426e-aa30-27453a6c102f",
+                "nameEnterprise": "titi.toto",
+                "password": "123456",
+                "groupAffiliated": "Atos",
+                "sectorActivity": "informatique",
+                "region": "Girond",
+                "turnOver": "0",
+                "description": "Atos of the region Gironde",
+                "siret": "12345678901234"
+            }
         },
         {
-            "id": 14,
+            "id": 34,
             "nameContact": "coucou",
             "email": "coucou@gmail.com",
-            "enterpriseUid": "xxx"
+            "enterprise": {
+                "uid": "65e720ad-916c-426e-aa30-27453a6c102f",
+                "nameEnterprise": "titi.toto",
+                "password": "123456",
+                "groupAffiliated": "Atos",
+                "sectorActivity": "informatique",
+                "region": "Girond",
+                "turnOver": "0",
+                "description": "Atos of the region Gironde",
+                "siret": "12345678901234"
+            }
         }
     ]
 }
@@ -163,12 +214,12 @@ BaseResVO
 ### Example response of failing request
 ``` javascript
 {
-    "code":2,
-    "message":"Wrong parameter",
-    "data":
-    {
-        null
-    }
+    "code": 2,
+    "message": "Wrong parameter",
+    "data": 
+    [
+        "Le SIRET doit contenir 14 chiffres"
+    ]
 }
 ```
 <h1 id="2">2. Information services</h1>

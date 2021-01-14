@@ -3,9 +3,7 @@ package com.projectagile.webprojectagile.entity;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.util.UUID;
@@ -46,6 +44,7 @@ public class Enterprise {
     //Vérifier que le SIRET contient les caractère de "0" à "9"
     @Pattern(regexp = "^[0-9]*$", message = "Le SIRET doit contenir 14 chiffres")
     @Length(min = 14, max = 14, message = "Le SIRET doit contenir 14 chiffres")
+    @Column(name = "siret", unique = true)
     private String siret;
 
     public Enterprise() {

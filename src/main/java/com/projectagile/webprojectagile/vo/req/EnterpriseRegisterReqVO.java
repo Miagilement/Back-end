@@ -10,6 +10,6 @@ import javax.validation.constraints.NotNull;
 public class EnterpriseRegisterReqVO extends BaseReqVO {
 
     @Valid
-    @NotNull
+    @NotNull(message = "Cannot be null")
     private Enterprise enterprise;
 }
