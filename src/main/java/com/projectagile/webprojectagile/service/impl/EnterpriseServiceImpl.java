@@ -9,7 +9,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implémentation de l'interface service
+ * Définition des fontions
+ */
+
 @Service
+// Pour chaque service, il faut copier le AllArgsConstructor tel quel
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EnterpriseServiceImpl implements EnterpriseService {
 
@@ -26,12 +32,12 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
-    public Enterprise findById(String uid) {
+    public Enterprise findByIdEnterprise(String uid) {
         return enterpriseDao.findById(uid).get();
     }
 
     @Override
-    public boolean isExist(Enterprise enterprise) {
+    public boolean isExistEnterprise(Enterprise enterprise) {
         Enterprise enterpriseExist = enterpriseDao.findBySiret(enterprise.getSiret());
         return enterpriseExist != null;
     }

@@ -1,6 +1,5 @@
 package com.projectagile.webprojectagile.controller;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.projectagile.webprojectagile.entity.Contact;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.ContactService;
@@ -27,7 +26,7 @@ public class ContactController {
     @PostMapping("/update-contact")
     public BaseResVO updateContact (@Valid @RequestBody ContactReqVO addContactReqVO){
         addContactReqVO.getContacts().forEach(contact -> {
-            enterpriseService.findById(contact.getUid());
+            enterpriseService.findByIdEnterprise(contact.getUid());
         });
         List<Contact> contacts = contactService.updateContact(addContactReqVO.getContacts());
 
@@ -40,7 +39,7 @@ public class ContactController {
 
     @PostMapping("/find-all-contact/{uid}")
     public BaseResVO findAllContact(@PathVariable String uid){
-        enterpriseService.findById(uid);
+        enterpriseService.findByIdEnterprise(uid);
         return ResultVOUtils.success(contactService.getAllContact(uid));
 
     }
@@ -53,7 +52,7 @@ public class ContactController {
 
     @PostMapping("/delete-all-contact/{uid}")
     public BaseResVO deleteAllContact(@PathVariable String uid){
-        enterpriseService.findById(uid);
+        enterpriseService.findByIdEnterprise(uid);
         contactService.deleteAllContact(uid);
         return ResultVOUtils.success(null);
     }

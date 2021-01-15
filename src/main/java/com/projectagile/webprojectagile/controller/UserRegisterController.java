@@ -11,19 +11,24 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/**
+ * Controler pour l'inscription des entreprises et particuliers
+ */
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping(value = "/user")
+// Pour chaque service, il faut copier le AllArgsConstructor tel quel
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserRegisterController {
 
     EnterpriseService enterpriseService;
 
-    //Pour les utilisateurs de l'entreprise
+    //Pour l'entreprise (lié au formulaire inscription entreprise)
     @PostMapping("/enterprise/register")
     public BaseResVO enterpriseRegister(@Valid @RequestBody EnterpriseRegisterReqVO enterpriseRegisterReqVO) {
         System.out.println(enterpriseRegisterReqVO);
-        if(enterpriseService.isExist(enterpriseRegisterReqVO.getEnterprise())){
+        if(enterpriseService.isExistEnterprise(enterpriseRegisterReqVO.getEnterprise())){
             String[] listString = {"Le SIRET existe déja, veuillez vous connecter directement!"};
             return ResultVOUtils.error(ResultEnum.DATA_REPEAT,listString);
         } else {
