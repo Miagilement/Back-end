@@ -3,17 +3,17 @@ package com.projectagile.webprojectagile.service.impl;
 import com.projectagile.webprojectagile.dao.TestClassDao;
 import com.projectagile.webprojectagile.entity.TestClass;
 import com.projectagile.webprojectagile.service.TestClassService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class TestClassServiceImpl implements TestClassService {
 
-    @Autowired
     TestClassDao testClassDao;
-
 
     @Override
     public TestClass addTestClass(TestClass testClass) {

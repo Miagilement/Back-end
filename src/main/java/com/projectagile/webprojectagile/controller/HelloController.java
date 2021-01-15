@@ -6,6 +6,7 @@ import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.impl.TestClassServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/test")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class HelloController {
 
-    @Autowired
     TestClassServiceImpl testClassService;
 
     @RequestMapping(path = "/hello", method = RequestMethod.GET)

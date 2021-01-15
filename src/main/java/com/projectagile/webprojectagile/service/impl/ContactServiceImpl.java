@@ -5,6 +5,7 @@ import com.projectagile.webprojectagile.dao.EnterpriseDao;
 import com.projectagile.webprojectagile.entity.Contact;
 import com.projectagile.webprojectagile.entity.Enterprise;
 import com.projectagile.webprojectagile.service.ContactService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,9 @@ import java.awt.*;
 import java.util.List;
 
 @Service
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ContactServiceImpl implements ContactService {
 
-    @Autowired
     ContactDao contactDao;
 
     @Override

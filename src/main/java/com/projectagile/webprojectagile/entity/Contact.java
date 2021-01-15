@@ -23,10 +23,8 @@ public class Contact {
     @Email(message = "Le email de contact doit respecter le format d'un eamil")
     private String email;
 
-    @Valid
-    @NotNull()
-    @ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
-    @JoinColumn(name = "uid", updatable = false, nullable = false)
-    private Enterprise enterprise;
-
+    //Uid de l'entreprise
+    @NotNull(message = "Il faut avoir un uid de l'entreprise")
+    @JoinColumn()
+    private String uid;
 }

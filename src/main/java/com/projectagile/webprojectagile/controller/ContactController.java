@@ -7,6 +7,7 @@ import com.projectagile.webprojectagile.service.ContactService;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.ContactReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +16,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value = "/user/enterprise/contact")
-
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ContactController {
 
-    @Autowired
     ContactService contactService;
 
     @PostMapping("/update-contact")
@@ -39,13 +39,15 @@ public class ContactController {
     }
 
     @PostMapping("/delete-contact/{id}")
-    public void deleteContactById(@PathVariable int id){
+    public BaseResVO deleteContactById(@PathVariable int id){
         contactService.deleteContact(id);
+        return ResultVOUtils.success(null);
     }
 
     @PostMapping("/delete-all-contact/{uid}")
-    public void deleteAllContact(@PathVariable String uid){
+    public BaseResVO deleteAllContact(@PathVariable String uid){
         contactService.deleteAllContact(uid);
+        return ResultVOUtils.success(null);
     }
 
 }

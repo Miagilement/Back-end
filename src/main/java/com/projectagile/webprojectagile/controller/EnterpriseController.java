@@ -5,6 +5,7 @@ import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.impl.EnterpriseServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,9 +14,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/info/enterprise")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EnterpriseController {
 
-    @Autowired
     EnterpriseServiceImpl enterpriseService;
 
     @PostMapping("/find-all-enterprise")
