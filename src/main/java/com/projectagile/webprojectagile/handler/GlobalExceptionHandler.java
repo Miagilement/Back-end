@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 
 @RestControllerAdvice
@@ -31,12 +32,19 @@ public class GlobalExceptionHandler {
 //    }
 
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
-    public BaseResVO handleMethodArgumentNotValid(MethodArgumentNotValidException e) {
+    public BaseResVO handlerMethodArgumentNotValid(MethodArgumentNotValidException e) {
         log.warn(e.getMessage());
         List<String> listError = new ArrayList<String>();
         e.getFieldErrors().forEach(fieldError -> {
             listError.add(fieldError.getDefaultMessage());
         });
         return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL, listError);
+    }
+
+
+    @ExceptionHandler(value = NoSuchElementException.class)
+    public BaseResVO handlerNoSuchElementException(NoSuchElementException e) {
+        log.error(e.getMessage());
+        return ResultVOUtils.error(ResultEnum.DATA_NOT);
     }
 }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import com.projectagile.webprojectagile.entity.Contact;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.ContactService;
+import com.projectagile.webprojectagile.service.EnterpriseService;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.ContactReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
@@ -21,9 +22,13 @@ public class ContactController {
 
     ContactService contactService;
 
+    EnterpriseService enterpriseService;
+
     @PostMapping("/update-contact")
     public BaseResVO updateContact (@Valid @RequestBody ContactReqVO addContactReqVO){
-        System.out.println(addContactReqVO.toString());
+        addContactReqVO.getContacts().forEach(contact -> {
+            enterpriseService.findById(contact.getUid());
+        });
         List<Contact> contacts = contactService.updateContact(addContactReqVO.getContacts());
 
         if(contacts != null){
@@ -35,7 +40,9 @@ public class ContactController {
 
     @PostMapping("/find-all-contact/{uid}")
     public BaseResVO findAllContact(@PathVariable String uid){
+        enterpriseService.findById(uid);
         return ResultVOUtils.success(contactService.getAllContact(uid));
+
     }
 
     @PostMapping("/delete-contact/{id}")
@@ -46,8 +53,8 @@ public class ContactController {
 
     @PostMapping("/delete-all-contact/{uid}")
     public BaseResVO deleteAllContact(@PathVariable String uid){
+        enterpriseService.findById(uid);
         contactService.deleteAllContact(uid);
         return ResultVOUtils.success(null);
     }
-
 }
