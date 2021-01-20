@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 
-public class WebUtilis {
+public class WebUtils {
     public static String toString (User user){
         StringBuilder sb = new StringBuilder();
         sb.append("Nom d'utilisateur:").append(user.getUsername());
