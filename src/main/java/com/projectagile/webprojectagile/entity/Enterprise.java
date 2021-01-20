@@ -25,9 +25,9 @@ public class Enterprise {
     @Id
     private String uid;
 
-//    @Email(message = "L'email de contact doit respecter le format d'un email")
-//    @NotNull(message = "L'email de l'entreprise ne doit pas être vide")
-//    private String email;
+    @Email(message = "L'email de contact doit respecter le format d'un email")
+    @NotNull(message = "L'email de l'entreprise ne doit pas être vide")
+    private String email;
 
     @NotNull(message = "Le nom de l'entreprise ne doit pas être vide")
     private String nameEnterprise;
