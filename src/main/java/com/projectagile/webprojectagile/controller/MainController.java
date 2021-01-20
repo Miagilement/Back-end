@@ -69,7 +69,7 @@ public class MainController {
             model.addAttribute("userInfo", userInfo);
 
             String message ="Salut" + principal.getName()//
-            +"<br> Vous n'avez pas la permission pour acceder à cette page!";
+            +"<br> Vous ne disposez pas une permission pour acceder à cette page!";
             model.addAttribute("message", message);
 
         }
