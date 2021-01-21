@@ -26,6 +26,7 @@ public class UserRegisterController {
 
     EnterpriseService enterpriseService;
     ParticulierService particulierService;
+
     //Pour l'entreprise (lié au formulaire inscription entreprise)
     @PostMapping("/enterprise/register")
     public BaseResVO enterpriseRegister(@Valid @RequestBody EnterpriseRegisterReqVO enterpriseRegisterReqVO) {
