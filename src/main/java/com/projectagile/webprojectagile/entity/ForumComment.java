@@ -3,30 +3,32 @@ package com.projectagile.webprojectagile.entity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 @Data
 @Entity
 @Table
-public class ForumSubject {
+public class ForumComment {
 
     @Id
     @GeneratedValue
     private int id;
 
-    private String title;
+    private int subject_id;
 
     private String text;
 
-    private String authorId;
+    private String author_id;
 
-    private Date datePost;
+    private Date dateComment;
 
     private Date dateLastModified;
 
-    public ForumSubject() {
+    public ForumComment() {
         this.dateLastModified = new Date();
     }
 }

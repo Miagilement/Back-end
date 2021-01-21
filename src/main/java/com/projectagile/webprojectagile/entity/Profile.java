@@ -17,7 +17,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table
-public class Particulier {
+public class Profile {
 
     @Id
     private String uid;
@@ -36,7 +36,7 @@ public class Particulier {
     @Length(min = 6, max = 16, message = "Le mot de passe doit compter entre 6 et 16 caractères")
     private String userPassword;
 
-    public Particulier(){
+    public Profile(){
         this.uid = UUID.randomUUID().toString();
     }
     
