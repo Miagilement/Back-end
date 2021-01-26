@@ -2,8 +2,10 @@ package com.projectagile.webprojectagile.controller;
 
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.EnterpriseService;
+import com.projectagile.webprojectagile.service.ProfileService;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.EnterpriseRegisterReqVO;
+import com.projectagile.webprojectagile.vo.req.ProfileRegisterReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,7 @@ import javax.validation.Valid;
 public class UserRegisterController {
 
     EnterpriseService enterpriseService;
+    ProfileService profileService;
 
     //Pour l'entreprise (lié au formulaire inscription entreprise)
     @PostMapping("/enterprise/register")
@@ -33,6 +36,17 @@ public class UserRegisterController {
             return ResultVOUtils.error(ResultEnum.DATA_REPEAT,listString);
         } else {
             return ResultVOUtils.success(enterpriseService.insertEnterprise(enterpriseRegisterReqVO.getEnterprise()));
+        }
+    }
+
+    @PostMapping("/particulier/register")
+    public BaseResVO particulierRegister(@Valid @RequestBody ProfileRegisterReqVO profileRegisterReqVO) {
+        System.out.println(profileRegisterReqVO);
+        if(profileService.isExistProfile(profileRegisterReqVO.getProfile())){
+            String[] listString = {"L'utilisateur existe déja, veuillez vous connecter directement!"};
+            return ResultVOUtils.error(ResultEnum.DATA_REPEAT,listString);
+        } else {
+            return ResultVOUtils.success(profileService.insertProfile(profileRegisterReqVO.getProfile()));
         }
     }
 }
