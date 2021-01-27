@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.*;
  */
 
 @RestController
-@RequestMapping("/info/particulier")
+@RequestMapping("/info/profile")
 // Pour chaque controleur, il faut copier le AllArgsConstructor tel quel
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ProfileController {
     
     ProfileServiceImpl particulierService;
 
-    @PostMapping("/find-all-particulier")
+    @PostMapping("/find-all-profile")
     public BaseResVO findAllParticulier(){
         List<Profile> profileList = particulierService.findAllProfile();
         if(profileList != null){
@@ -54,4 +54,6 @@ public class ProfileController {
             return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
         }
     }
+
+
 }

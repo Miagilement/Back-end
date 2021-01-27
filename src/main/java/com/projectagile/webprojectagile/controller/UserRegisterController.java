@@ -39,7 +39,7 @@ public class UserRegisterController {
         }
     }
 
-    @PostMapping("/particulier/register")
+    @PostMapping("/profile/register")
     public BaseResVO particulierRegister(@Valid @RequestBody ProfileRegisterReqVO profileRegisterReqVO) {
         System.out.println(profileRegisterReqVO);
         if(profileService.isExistProfile(profileRegisterReqVO.getProfile())){

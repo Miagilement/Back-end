@@ -20,21 +20,10 @@ import java.util.UUID;
 @Data
 @Entity
 @Table
-public class Enterprise {
-
-    @Id
-    private String uid;
-
-    @Email(message = "L'email de contact doit respecter le format d'un email")
-    @NotNull(message = "L'email de l'entreprise ne doit pas être vide")
-    private String email;
+public class Enterprise extends Profile{
 
     @NotNull(message = "Le nom de l'entreprise ne doit pas être vide")
     private String nameEnterprise;
-
-    @NotNull(message = "Le mot de passe ne doit pas être vide")
-    @Length(min = 6, max = 16, message = "Le mot de passe doit compter entre 6 et 16 caractères")
-    private String password;
 
     private String groupAffiliated;
 
@@ -60,7 +49,5 @@ public class Enterprise {
     @Column(name = "siret", unique = true)
     private String siret;
 
-    public Enterprise() {
-        this.uid = UUID.randomUUID().toString();
-    }
+
 }

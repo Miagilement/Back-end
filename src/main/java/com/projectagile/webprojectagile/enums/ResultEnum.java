@@ -9,10 +9,11 @@ public enum ResultEnum {
     SUCCESS(0, "Success"),
     LOGIN_VERIFY_FALL(1, "Login failed"),
     PARAM_VERIFY_FALL(2, "Wrong parameter"),
-    AUTH_FAILED(3, "No authentification"),
+    AUTH_FAILED(3, "No authentication"),
     DATA_NOT(4, "No related data"),
     DATA_CHANGE(5, "Data no changed"),
     DATA_REPEAT(6, "Data is already existed"),
+    USER_NOT(7, "User is not existed")
     ;
 
     private Integer code;

@@ -12,7 +12,7 @@ import java.util.List;
 
 @Repository
 @Transactional
-public class AppRoleDAO{
+public class RoleDAO {
     @Autowired
     private EntityManager entityManager;
 
@@ -23,8 +23,9 @@ public class AppRoleDAO{
         Query query = this.entityManager.createQuery(sql, String.class);
         query.setParameter("userId", userId);
         return query.getResultList();
+
     }
- 
+
 }
 
 

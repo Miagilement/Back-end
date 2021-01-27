@@ -12,6 +12,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ProfileDao extends CrudRepository<Profile, String> {
     
-    @Query(value = "SELECT * FROM particulier as e WHERE e.user_email = ?1", nativeQuery = true)
-    Profile findByUserEmail(String userEmail);;
+    @Query(value = "SELECT * FROM profile as e WHERE e.user_email = ?1", nativeQuery = true)
+    Profile findByUserEmail(String userEmail);
 }
