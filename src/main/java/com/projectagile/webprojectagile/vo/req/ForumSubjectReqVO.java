@@ -8,6 +8,5 @@ import javax.validation.Valid;
 @Data
 public class ForumSubjectReqVO extends BaseReqVO{
 
-    @Valid
     private ForumSubject forumSubject;
 }
