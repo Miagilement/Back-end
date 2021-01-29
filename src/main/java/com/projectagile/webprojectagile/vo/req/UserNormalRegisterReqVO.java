@@ -1,7 +1,8 @@
 package com.projectagile.webprojectagile.vo.req;
 
-import com.projectagile.webprojectagile.entity.Profile;
+import com.projectagile.webprojectagile.entity.UserNormal;
 import lombok.Data;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -10,10 +11,10 @@ import javax.validation.constraints.NotNull;
  */
 
 @Data
-public class ProfileRegisterReqVO extends BaseReqVO {
+public class UserNormalRegisterReqVO extends BaseReqVO {
     @Valid
     @NotNull(message = "l'utilisateur ne doit pas être nulle")
-    private Profile profile;
+    private UserNormal userNormal;
 
 
 }
