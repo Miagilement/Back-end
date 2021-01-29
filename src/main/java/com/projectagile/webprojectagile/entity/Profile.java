@@ -2,9 +2,12 @@ package com.projectagile.webprojectagile.entity;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -26,14 +29,17 @@ public class Profile{
     private String userEmail;
 
     @NotNull(message = "Le mot de passe ne doit pas être vide")
-    @Length(min = 6, max = 16, message = "Le mot de passe doit compter entre 6 et 16 caractères")
+    @Length(min = 6, message = "Le mot de passe doit être supérieur à 6 caractères")
     private String userPassword;
 
-
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_role",
+            joinColumns = @JoinColumn(name = "uid"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public Profile() {
         this.uid = UUID.randomUUID().toString();
     }
 
-    
 }

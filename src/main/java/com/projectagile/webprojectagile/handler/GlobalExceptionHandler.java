@@ -4,6 +4,8 @@ import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.InternalAuthenticationServiceException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,7 +21,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = RuntimeException.class)
     public BaseResVO handlerRuntimeException(RuntimeException e) {
-        log.error(e.getMessage());
+        log.error(e.toString());
         // return the corresponded error
         return ResultVOUtils.error(ResultEnum.NOT_NETWORK);
     }
@@ -46,5 +48,11 @@ public class GlobalExceptionHandler {
     public BaseResVO handlerNoSuchElementException(NoSuchElementException e) {
         log.error(e.getMessage());
         return ResultVOUtils.error(ResultEnum.DATA_NOT);
+    }
+
+    @ExceptionHandler(value = InternalAuthenticationServiceException.class)
+    public BaseResVO handlerInternalAuthenticationServiceException(InternalAuthenticationServiceException e) {
+        log.error(e.getMessage());
+        return ResultVOUtils.error(ResultEnum.USER_NOT);
     }
 }

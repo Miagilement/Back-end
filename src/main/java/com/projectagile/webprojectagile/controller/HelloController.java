@@ -25,7 +25,7 @@ public class HelloController {
     @RequestMapping(path = "/hello", method = RequestMethod.GET)
 
 
-    @GetMapping("/hello")
+    @PostMapping("/hello")
     public String helloTest(){
         System.out.println("helloTest called");
         return "Hello world!";

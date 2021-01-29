@@ -2,11 +2,13 @@ package com.projectagile.webprojectagile.utils;
 
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
+import org.springframework.stereotype.Component;
 
 
 /**
  * Util class for BaseResVO
  */
+@Component
 public class ResultVOUtils {
 
     /**

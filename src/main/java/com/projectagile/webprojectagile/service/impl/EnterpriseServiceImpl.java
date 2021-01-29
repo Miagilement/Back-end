@@ -1,13 +1,19 @@
 package com.projectagile.webprojectagile.service.impl;
 
 import com.projectagile.webprojectagile.dao.EnterpriseDao;
+import com.projectagile.webprojectagile.dao.RoleDao;
 import com.projectagile.webprojectagile.entity.Enterprise;
+import com.projectagile.webprojectagile.entity.Role;
+import com.projectagile.webprojectagile.enums.RoleList;
 import com.projectagile.webprojectagile.service.EnterpriseService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Implémentation de l'interface service
@@ -21,8 +27,15 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
     EnterpriseDao enterpriseDao;
 
+    RoleDao roleDao;
+
     @Override
     public Enterprise insertEnterprise(Enterprise enterprise) {
+        enterprise.setUserPassword(BCrypt.hashpw(enterprise.getUserPassword(), BCrypt.gensalt()));
+        Set<Role> roles = new HashSet<>();
+        roles.add(roleDao.findByRoleName(RoleList.USER_ENTERPRISE.getRoleName()));
+        enterprise.setRoles(roles);
+        System.out.println(enterprise.getUserPassword());
         return enterpriseDao.save(enterprise);
     }
 

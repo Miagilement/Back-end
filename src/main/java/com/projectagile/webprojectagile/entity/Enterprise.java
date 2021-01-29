@@ -2,11 +2,15 @@ package com.projectagile.webprojectagile.entity;
 
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
-import javax.persistence.*;
-import javax.validation.constraints.Email;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.UUID;
+import java.util.Collection;
 
 /**
  * Object Relational Mapping pour la table "Enterprise"
@@ -20,7 +24,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table
-public class Enterprise extends Profile{
+public class Enterprise extends Profile {
 
     @NotNull(message = "Le nom de l'entreprise ne doit pas être vide")
     private String nameEnterprise;
@@ -46,8 +50,7 @@ public class Enterprise extends Profile{
     //Vérifier que le num SIRET contient uniquement les caractère de "0" à "9"
     @Pattern(regexp = "^[0-9]*$", message = "Le SIRET ne doit pas contenir des lettres ou caractères spéciaux")
     @Length(min = 14, max = 14, message = "Le SIRET doit contenir 14 chiffres")
-    @Column(name = "siret", unique = true)
+    @Column(unique = true)
     private String siret;
-
 
 }

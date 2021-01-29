@@ -12,6 +12,12 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface EnterpriseDao extends CrudRepository<Enterprise, String> {
 
-    @Query(value = "SELECT * FROM enterprise as e WHERE e.siret = ?1", nativeQuery = true)
     Enterprise findBySiret(String siret);
+
+//    @Query(value = "SELECT * FROM enterprise as un WHERE e.user_email = ?1", nativeQuery = true)
+//    Enterprise findByUserEmail(String userEmail);
+
+    Enterprise findByUserEmail(String userEmail);
+
+    boolean existsByUserEmail(String userEmail);
 }
