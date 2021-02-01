@@ -147,6 +147,11 @@ BaseResVO
 |userType    |yes    |string   |User type|
 
 
+### Request class
+``` javascript
+IndividualRegisterReqVO
+```
+
 ### Response class
 ``` javascript
 BaseResVO
@@ -396,8 +401,7 @@ BaseResVO
 > ../info/individual/find-by-id/68ab10bd-0f88-45a4-960b-37bc072f335b
 
 ### HTTP request methode
-> POST
-
+> RESTful
 
 ### Response class
 ``` javascript
@@ -405,11 +409,9 @@ BaseResVO
 ```
 
 ### Example request
-
 ``` javascript
 ../info/individual/find-by-id/68ab10bd-0f88-45a4-960b-37bc072f335b
 ```
-
 
 ### Example response of succesful request
 ``` javascript
@@ -459,6 +461,11 @@ BaseResVO
 |userEmail   |yes   |string|user email                       |
 |userPassword  |yes   |string|user password                      |
 |userType   |yes   |string|user type                        |
+
+### Request class
+``` javascript
+IndividualReqVO
+```
 
 ### Response class
 ``` javascript
@@ -638,6 +645,11 @@ BaseResVO
 |title   |yes   |string|uid of enterprise                         |
 |text   |yes   |string|user name                      |
 
+### Request class
+``` javascript
+ForumSubjectReqVO
+```
+
 ### Response class
 ``` javascript
 BaseResVO
@@ -705,6 +717,11 @@ BaseResVO
 |:-----  |:-------|:-----|-----                               |
 |title   |yes   |string|uid of enterprise                         |
 |text   |yes   |string|user name                      |
+
+### Request class
+``` javascript
+ForumSubjectReqVO
+```
 
 ### Response class
 ``` javascript
@@ -964,6 +981,11 @@ BaseResVO
 |text   |yes   |string|comment                      |
 |authorId  |yes   |string|uid of the author                   |
 
+### Request class
+``` javascript
+ForumCommentReqVO
+```
+
 ### Response class
 ``` javascript
 BaseResVO
@@ -1032,6 +1054,11 @@ BaseResVO
 |Id   |yes   |string|id of the comment                        |
 |text   |yes   |string|comment                                |
 |authorId  |yes   |string|uid of the author                   |
+
+### Request class
+``` javascript
+ForumCommentReqVO
+```
 
 ### Response class
 ``` javascript

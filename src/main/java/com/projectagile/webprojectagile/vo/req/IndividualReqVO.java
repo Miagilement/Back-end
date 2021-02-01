@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Data
-public class IndividualRegisterReqVO extends BaseReqVO {
+public class IndividualReqVO extends BaseReqVO {
     @Valid
     @NotNull(message = "l'utilisateur ne doit pas être nulle")
     private Individual individual;

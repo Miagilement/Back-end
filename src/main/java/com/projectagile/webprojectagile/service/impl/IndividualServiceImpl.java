@@ -34,7 +34,7 @@ public class IndividualServiceImpl implements IndividualService {
     public Individual insertProfile(Individual individual) {
         individual.setUserPassword(BCrypt.hashpw(individual.getUserPassword(), BCrypt.gensalt()));
         Set<Role> roles = new HashSet<>();
-        roles.add(roleDao.findByRoleName(RoleList.USER_ENTERPRISE.getRoleName()));
+        roles.add(roleDao.findByRoleName(RoleList.USER_INDIVIDUAL.getRoleName()));
         individual.setRoles(roles);
         return individualDao.save(individual);
     }

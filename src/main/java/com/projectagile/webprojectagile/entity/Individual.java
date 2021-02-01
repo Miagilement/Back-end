@@ -4,10 +4,11 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Entity
@@ -19,6 +20,7 @@ public class Individual extends Profile {
 
     @NotNull(message = "Vous devez choisir votre catégorie professionelle")
     private String userType;
+
 
 
 }

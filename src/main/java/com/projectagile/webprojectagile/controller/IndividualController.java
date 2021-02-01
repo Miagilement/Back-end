@@ -5,7 +5,7 @@ import com.projectagile.webprojectagile.entity.Profile;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.impl.IndividualServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
-import com.projectagile.webprojectagile.vo.req.IndividualRegisterReqVO;
+import com.projectagile.webprojectagile.vo.req.IndividualReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +47,8 @@ public class IndividualController {
     }
 
     @PostMapping("/update-individual-info")
-    public BaseResVO updateUserInfo(@RequestBody IndividualRegisterReqVO individualRegisterReqVO) {
-        Profile profile = individualService.updateUserInfo(individualRegisterReqVO.getIndividual());
+    public BaseResVO updateUserInfo(@RequestBody IndividualReqVO individualReqVO) {
+        Profile profile = individualService.updateUserInfo(individualReqVO.getIndividual());
         if (profile != null) {
             return ResultVOUtils.success(profile);
         } else {
