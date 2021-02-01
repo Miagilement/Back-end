@@ -39,7 +39,7 @@ public class UserRegisterController {
         }
     }
 
-    @PostMapping("/normal/register")
+    @PostMapping("/individual/register")
     public BaseResVO particulierRegister(@RequestBody IndividualReqVO individualReqVO) {
         System.out.println(individualReqVO);
         if (individualService.isExist(individualReqVO.getIndividual())) {
