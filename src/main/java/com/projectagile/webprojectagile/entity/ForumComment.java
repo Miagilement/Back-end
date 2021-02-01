@@ -18,11 +18,11 @@ public class ForumComment {
     @GeneratedValue
     private int id;
 
-    private int subject_id;
+    private int subjectId;
 
     private String text;
 
-    private String author_id;
+    private String authorId;
 
     private Date dateComment;
 

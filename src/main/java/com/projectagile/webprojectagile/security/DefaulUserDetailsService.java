@@ -1,7 +1,7 @@
 package com.projectagile.webprojectagile.security;
 
 import com.projectagile.webprojectagile.dao.EnterpriseDao;
-import com.projectagile.webprojectagile.dao.UserNormalDao;
+import com.projectagile.webprojectagile.dao.IndividualDao;
 import com.projectagile.webprojectagile.entity.Enterprise;
 import com.projectagile.webprojectagile.security.UserDetails.UserDetailsImpl;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class DefaulUserDetailsService implements UserDetailsService {
 
     private EnterpriseDao enterpriseDao;
-    private UserNormalDao userNormalDao;
+    private IndividualDao individualDao;
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {

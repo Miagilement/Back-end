@@ -1,11 +1,11 @@
 package com.projectagile.webprojectagile.controller;
 
+import com.projectagile.webprojectagile.entity.Individual;
 import com.projectagile.webprojectagile.entity.Profile;
-import com.projectagile.webprojectagile.entity.UserNormal;
 import com.projectagile.webprojectagile.enums.ResultEnum;
-import com.projectagile.webprojectagile.service.impl.UserNormalServiceImpl;
+import com.projectagile.webprojectagile.service.impl.IndividualServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
-import com.projectagile.webprojectagile.vo.req.UserNormalRegisterReqVO;
+import com.projectagile.webprojectagile.vo.req.IndividualRegisterReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,16 +18,16 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/info/profile")
+@RequestMapping("/info/individual")
 // Pour chaque controleur, il faut copier le AllArgsConstructor tel quel
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class ProfileController {
+public class IndividualController {
 
-    UserNormalServiceImpl userNormalService;
+    IndividualServiceImpl individualService;
 
-    @PostMapping("/find-all-profile")
+    @PostMapping("/find-all-individual")
     public BaseResVO findAllParticulier() {
-        List<UserNormal> userList = userNormalService.findAllProfile();
+        List<Individual> userList = individualService.findAllProfile();
         if (userList != null) {
             return ResultVOUtils.success(userList);
         } else {
@@ -38,7 +38,7 @@ public class ProfileController {
     //le uid est récupéré dans l'url pour le renvoyer au front-end
     @PostMapping("/find-by-id/{uid}")
     public BaseResVO findParticulierById(@PathVariable String uid){
-        Profile profile = userNormalService.findProfileById(uid);
+        Profile profile = individualService.findProfileById(uid);
         if(profile != null){
             return ResultVOUtils.success(profile);
         } else {
@@ -46,9 +46,9 @@ public class ProfileController {
         }
     }
 
-    @PostMapping("/update-user-info")
-    public BaseResVO updateUserInfo(@RequestBody UserNormalRegisterReqVO userNormalRegisterReqVO) {
-        Profile profile = userNormalService.updateUserInfo(userNormalRegisterReqVO.getUserNormal());
+    @PostMapping("/update-individual-info")
+    public BaseResVO updateUserInfo(@RequestBody IndividualRegisterReqVO individualRegisterReqVO) {
+        Profile profile = individualService.updateUserInfo(individualRegisterReqVO.getIndividual());
         if (profile != null) {
             return ResultVOUtils.success(profile);
         } else {

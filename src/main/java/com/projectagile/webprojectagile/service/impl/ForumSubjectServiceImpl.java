@@ -31,9 +31,11 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
 
     @Override
     public ForumSubject updateForumSubject(ForumSubject forumSubject) {
-        Date date = this.forumSubjectDao.findById(forumSubject.getId()).get().getDatePost();
-        forumSubject.setDatePost(date);
-        return forumSubjectDao.save(forumSubject);
+        ForumSubject forumSubject1 = this.forumSubjectDao.findById(forumSubject.getId()).get();
+        forumSubject1.setDateLastModified(new Date());
+        forumSubject1.setText(forumSubject.getText());
+        forumSubject1.setTitle(forumSubject.getTitle());
+        return forumSubjectDao.save(forumSubject1);
     }
 
     @Override

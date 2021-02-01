@@ -1,7 +1,6 @@
 package com.projectagile.webprojectagile.dao;
 
-import com.projectagile.webprojectagile.entity.UserNormal;
-import org.springframework.data.jpa.repository.Query;
+import com.projectagile.webprojectagile.entity.Individual;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -10,10 +9,10 @@ import org.springframework.data.repository.CrudRepository;
  * On lui passe la classe de l'entité et le type de la PK de l'entité
  */
 
-public interface UserNormalDao extends CrudRepository<UserNormal, String> {
+public interface IndividualDao extends CrudRepository<Individual, String> {
 
 //    @Query(value = "SELECT * FROM user_normal as un WHERE un.user_email = ?1", nativeQuery = true)
-    UserNormal findByUserEmail(String userEmail);
+    Individual findByUserEmail(String userEmail);
 
     boolean existsByUserEmail(String userEmail);
 

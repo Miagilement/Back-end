@@ -12,7 +12,7 @@ import java.util.Collection;
 @Data
 @Entity
 @Table
-public class UserNormal extends Profile {
+public class Individual extends Profile {
 
     @NotNull(message = "Le champ pseudo ne doit pas être vide")
     private String userName;

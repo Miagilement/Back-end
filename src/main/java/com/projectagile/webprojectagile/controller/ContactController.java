@@ -4,6 +4,7 @@ import com.projectagile.webprojectagile.entity.Contact;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.ContactService;
 import com.projectagile.webprojectagile.service.EnterpriseService;
+import com.projectagile.webprojectagile.service.impl.EnterpriseServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.ContactReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
@@ -21,7 +22,7 @@ public class ContactController {
 
     ContactService contactService;
 
-    EnterpriseService enterpriseService;
+    EnterpriseServiceImpl enterpriseService;
 
     @PostMapping("/update-contact")
     public BaseResVO updateContact (@Valid @RequestBody ContactReqVO addContactReqVO){
