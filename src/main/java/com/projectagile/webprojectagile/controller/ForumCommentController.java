@@ -21,7 +21,7 @@ public class ForumCommentController {
 
     ForumCommentServiceImpl forumCommentService;
 
-    @PostMapping("/find-comment-by-subject/{subjectId}")
+    @PostMapping("/find-all-comments-by-subject/{subjectId}")
     public BaseResVO findAllCommentsBySubject(@PathVariable int subjectId){
         List<ForumComment> commentList = this.forumCommentService.findCommentBySubjectId(subjectId);
         if(commentList != null){

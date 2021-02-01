@@ -892,7 +892,7 @@ BaseResVO
 > Allow to get all comment of the forum subject
 
 ### URL
-> ../forum/comment/find-comment-by-subject/{subjectId}
+> ../forum/comment/find-all-comments-by-subject/{subjectId}
 
 ### Support format
 > RESTful
@@ -909,7 +909,7 @@ BaseResVO
 ### Example request
 
 ``` javascript
-../forum/comment/find-comment-by-subject/80
+../forum/comment/find-all-comments-by-subject/80
 ```
 
 
