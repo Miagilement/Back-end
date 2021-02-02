@@ -21,9 +21,9 @@ public class ForumCommentController {
 
     ForumCommentServiceImpl forumCommentService;
 
-    @PostMapping("/find-comments-by-subject/{id}")
-    public BaseResVO findAllCommentsBySubject(@PathVariable int id){
-        List<ForumComment> commentList = this.forumCommentService.findCommentBySubjectId(id);
+    @PostMapping("/find-all-comments-by-subject/{subjectId}")
+    public BaseResVO findAllCommentsBySubject(@PathVariable int subjectId){
+        List<ForumComment> commentList = this.forumCommentService.findCommentBySubjectId(subjectId);
         if(commentList != null){
             return ResultVOUtils.success(commentList);
         } else {
@@ -31,17 +31,17 @@ public class ForumCommentController {
         }
     }
 
-    @PostMapping("/find-comments-by-id/{id}")
-    public BaseResVO findCommentsById(@PathVariable int id){
-        ForumComment forumComment = this.forumCommentService.findForumCommentById(id);
-        if(forumComment != null){
-            return ResultVOUtils.success(forumComment);
-        } else {
-            return ResultVOUtils.error();
-        }
-    }
+//    @PostMapping("/find-comments-by-id/{id}")
+//    public BaseResVO findCommentsById(@PathVariable int id){
+//        ForumComment forumComment = this.forumCommentService.findForumCommentById(id);
+//        if(forumComment != null){
+//            return ResultVOUtils.success(forumComment);
+//        } else {
+//            return ResultVOUtils.error();
+//        }
+//    }
 
-    @PostMapping("/add-forum-comments")
+    @PostMapping("/add-forum-comment")
     public BaseResVO addComments(@RequestBody ForumCommentReqVO forumCommentReqVO){
         ForumComment forumComment = this.forumCommentService.insertForumComment(forumCommentReqVO.getForumComment());
         if(forumComment != null){
@@ -51,7 +51,7 @@ public class ForumCommentController {
         }
     }
 
-    @PostMapping("/update-comments")
+    @PostMapping("/update-comment")
     public BaseResVO updateComments(@RequestBody ForumCommentReqVO forumCommentReqVO){
         ForumComment forumComment = this.forumCommentService.updateForumComment(forumCommentReqVO.getForumComment());
         if(forumComment != null){
@@ -61,7 +61,7 @@ public class ForumCommentController {
         }
     }
 
-    @PostMapping("/delete-comments/{id}")
+    @PostMapping("/delete-forum-comment/{id}")
     public BaseResVO deleteCommentsById(@PathVariable int id){
         this.forumCommentService.deleteForumCommentById(id);
         return ResultVOUtils.success(null);

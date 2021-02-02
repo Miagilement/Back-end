@@ -34,7 +34,9 @@ public class ForumCommentServiceImpl implements ForumCommentService {
 
     @Override
     public ForumComment updateForumComment(ForumComment forumComment) {
-        return this.forumCommentDao.save(forumComment);
+        ForumComment forumComment1 = this.forumCommentDao.findById(forumComment.getId()).get();
+        forumComment1.setText(forumComment.getText());
+        return this.forumCommentDao.save(forumComment1);
     }
 
     @Override

@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -19,7 +20,8 @@ import java.util.UUID;
 
 @Data
 @MappedSuperclass
-public class Profile{
+@Inheritance(strategy = InheritanceType.JOINED)
+public class Profile implements Serializable {
 
     @Id
     private String uid;
@@ -32,10 +34,7 @@ public class Profile{
     @Length(min = 6, message = "Le mot de passe doit être supérieur à 6 caractères")
     private String userPassword;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_role",
-            joinColumns = @JoinColumn(name = "uid"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
 
     public Profile() {

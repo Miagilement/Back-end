@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
  */
 
 @Data
-public class EnterpriseRegisterReqVO extends BaseReqVO {
+public class EnterpriseReqVO extends BaseReqVO {
 
     @Valid
     @NotNull(message = "L'entité entreprise ne doit pas être nulle")

@@ -23,9 +23,9 @@ public class ForumSubjectController {
     ForumSubjectServiceImpl forumSubjectService;
 
     @PostMapping("/find-all-forum-subjects")
-    public BaseResVO findAllForumSubject(){
+    public BaseResVO findAllForumSubject() {
         List<ForumSubject> forumSubjectList = forumSubjectService.findAllForumSubject();
-        if(forumSubjectList != null){
+        if (forumSubjectList != null) {
             return ResultVOUtils.success(forumSubjectList);
         } else {
             return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
@@ -33,9 +33,9 @@ public class ForumSubjectController {
     }
 
     @PostMapping("/add-forum-subject")
-    public BaseResVO addForumSubject(@RequestBody ForumSubjectReqVO forumSubjectReqVO){
+    public BaseResVO addForumSubject(@RequestBody ForumSubjectReqVO forumSubjectReqVO) {
         ForumSubject forumSubject = this.forumSubjectService.insertForumSubject(forumSubjectReqVO.getForumSubject());
-        if(forumSubject != null){
+        if (forumSubject != null) {
             return ResultVOUtils.success(forumSubject);
         } else {
             return ResultVOUtils.error();
@@ -43,9 +43,9 @@ public class ForumSubjectController {
     }
 
     @PostMapping("/update-forum-subject")
-    public BaseResVO updateForumSubject(@RequestBody ForumSubjectReqVO forumSubjectReqVO){
+    public BaseResVO updateForumSubject(@RequestBody ForumSubjectReqVO forumSubjectReqVO) {
         ForumSubject forumSubject = this.forumSubjectService.updateForumSubject(forumSubjectReqVO.getForumSubject());
-        if(forumSubject != null){
+        if (forumSubject != null) {
             return ResultVOUtils.success(forumSubject);
         } else {
             return ResultVOUtils.error();
@@ -53,9 +53,9 @@ public class ForumSubjectController {
     }
 
     @PostMapping("/find-forum-subject-by-id/{id}")
-    public BaseResVO findForumSubjectById(@PathVariable int id){
+    public BaseResVO findForumSubjectById(@PathVariable int id) {
         ForumSubject forumSubject = this.forumSubjectService.findForumSubjectById(id);
-        if(forumSubject != null){
+        if (forumSubject != null) {
             return ResultVOUtils.success(forumSubject);
         } else {
             return ResultVOUtils.error();
@@ -63,7 +63,7 @@ public class ForumSubjectController {
     }
 
     @PostMapping("/delete-forum-subject-by-id/{id}")
-    public BaseResVO deleteForumSubjectById(@PathVariable int id){
+    public BaseResVO deleteForumSubjectById(@PathVariable int id) {
         this.forumSubjectService.deleteForumSubjectById(id);
         return ResultVOUtils.success(null);
     }
