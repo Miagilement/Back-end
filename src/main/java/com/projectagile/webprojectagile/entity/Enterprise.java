@@ -42,7 +42,7 @@ public class Enterprise extends Profile {
     @Pattern(regexp = "^[0-9]*$", message = "Le CA ne doit pas contenir des lettres ou caractères spéciaux")
     private String turnOver;
 
-    @NotNull(message = "Le description de l'entreprise ne doit pas être vide")
+    @NotNull(message = "La description de l'entreprise ne doit pas être vide")
     @Length(max = 300, message = "La description ne doit pas dépasser 300 caractères")
     private String description;
 

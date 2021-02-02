@@ -72,6 +72,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     }
                 });
                 httpSecurity.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                httpSecurity.authorizeRequests()
+                .antMatchers("/register").permitAll()
+                .antMatchers("/confirm").permitAll();
     }
 
     @Bean
