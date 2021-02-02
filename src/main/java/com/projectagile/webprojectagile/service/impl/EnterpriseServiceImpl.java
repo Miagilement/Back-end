@@ -51,7 +51,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
     @Override
     public boolean isExistEnterprise(Enterprise enterprise) {
-        Enterprise enterpriseExist = enterpriseDao.findBySiret(enterprise.getSiret());
+        Enterprise enterpriseExist = enterpriseDao.findByUserEmailOrSiret(enterprise.getUserEmail(), enterprise.getSiret());
         return enterpriseExist != null;
     }
 }

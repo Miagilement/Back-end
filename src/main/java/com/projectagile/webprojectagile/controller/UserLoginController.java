@@ -6,6 +6,7 @@ import com.projectagile.webprojectagile.utils.JwtUtils;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.UserLoginReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
+import com.projectagile.webprojectagile.vo.res.UserLoginResVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/user")
@@ -59,11 +62,10 @@ public class UserLoginController {
         System.out.println(authentication.getPrincipal());
         String jwt = jwtUtils.generateToken(authentication);
 
-//        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-//        List<String> roles = userDetails.getAuthorities().stream()
-//                .map(item -> item.getAuthority())
-//                .collect(Collectors.toList());
-        return ResultVOUtils.success(jwt);
-
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
+        return ResultVOUtils.success(userDetails);
     }
 }

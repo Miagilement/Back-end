@@ -16,7 +16,6 @@ public interface EnterpriseDao extends CrudRepository<Enterprise, String> {
 
     //Requete générée automatiquement par Hibernate
     //Equivalent à : @Query(value = "SELECT * FROM enterprise as un WHERE e.user_email = ?1", nativeQuery = true)
-    Enterprise findByUserEmail(String userEmail);
+    Enterprise findByUserEmailOrSiret(String userEmail, String Siret);
 
-    boolean existsByUserEmail(String userEmail);
 }

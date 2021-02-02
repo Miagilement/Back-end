@@ -32,7 +32,7 @@ public class UserRegisterController {
     public BaseResVO enterpriseRegister(@Valid @RequestBody EnterpriseReqVO enterpriseReqVO) {
         System.out.println(enterpriseReqVO);
         if (enterpriseService.isExistEnterprise(enterpriseReqVO.getEnterprise())) {
-            String[] listString = {"Le SIRET existe déja, veuillez vous connecter directement!"};
+            String[] listString = {"Le SIRET ou email est déja inscrit, veuillez vous connecter directement!"};
             return ResultVOUtils.error(ResultEnum.DATA_REPEAT, listString);
         } else {
             return ResultVOUtils.success(enterpriseService.insertEnterprise(enterpriseReqVO.getEnterprise()));

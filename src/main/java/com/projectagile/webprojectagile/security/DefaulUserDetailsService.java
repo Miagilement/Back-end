@@ -26,7 +26,7 @@ public class DefaulUserDetailsService implements UserDetailsService {
             log.info("User：{} does not exist", userEmail);
             throw new UsernameNotFoundException("User：" + userEmail + " does not exist");
         }
-        Enterprise enterprise = this.enterpriseDao.findByUserEmail(userEmail);
+        Enterprise enterprise = this.enterpriseDao.findByUserEmailOrSiret(userEmail, null);
         System.out.println(enterprise.getRoles());
         return UserDetailsImpl.build(enterprise);
     }
