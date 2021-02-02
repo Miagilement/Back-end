@@ -18,7 +18,7 @@ import java.util.Set;
 
 /**
  * Implémentation de l'interface service
- * Définition des fontions
+ * Définition des fontions (fonctionnalités de la plateforme)
  */
 
 @Service

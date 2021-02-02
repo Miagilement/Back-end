@@ -13,7 +13,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Object Relational Mapping pour la table "Enterprise"
+ * Enterprise est la classe fille de "Profile"
+ * Object Relational Mapping pour la table "enterprise"
  * Les vérifications sur les données de "Enterprise" sont faites ici
  * La vérification des données est faite par HiberNate Validator
  * Se réferer à : https://docs.jboss.org/hibernate/annotations/3.4/reference/fr/html/validator.html

@@ -11,7 +11,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface IndividualDao extends CrudRepository<Individual, String> {
 
-//    @Query(value = "SELECT * FROM user_normal as un WHERE un.user_email = ?1", nativeQuery = true)
+    //Requete générée automatiquement par Hibernate
+    //Equivalent à : @Query(value = "SELECT * FROM individual as un WHERE un.user_email = ?1", nativeQuery = true)
     Individual findByUserEmail(String userEmail);
 
     boolean existsByUserEmail(String userEmail);

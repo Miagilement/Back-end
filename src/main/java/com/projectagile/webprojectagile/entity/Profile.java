@@ -12,8 +12,8 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Object Relational Mapping pour la table "Enterprise"
- * Les vérifications sur les données de "Enterprise" sont faites ici
+ * "Profile" est la classe mère de Enterprise et Individual
+ * Les vérifications sur les données de "Profile" sont faites ici
  * La vérification des données est faite par HiberNate Validator
  * Se réferer à : https://docs.jboss.org/hibernate/annotations/3.4/reference/fr/html/validator.html
  */
@@ -34,6 +34,7 @@ public class Profile implements Serializable {
     @Length(min = 6, message = "Le mot de passe doit être supérieur à 6 caractères")
     private String userPassword;
 
+    //Affectation d'un ou plusieurs roles à un profil
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
     private Set<Role> roles = new HashSet<>();
 

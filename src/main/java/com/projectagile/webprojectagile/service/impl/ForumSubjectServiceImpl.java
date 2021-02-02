@@ -11,6 +11,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Implémentation de l'interface service
+ * Définition des fontions (fonctionnalités de la plateforme)
+ */
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))

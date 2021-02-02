@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Implémentation de l'interface service
+ * Définition des fontions (fonctionnalités de la plateforme)
+ */
+
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ForumCommentServiceImpl implements ForumCommentService {
