@@ -20,7 +20,6 @@ import java.util.UUID;
 
 @Data
 @MappedSuperclass
-@Inheritance(strategy = InheritanceType.JOINED)
 public class Profile implements Serializable {
 
     @Id
@@ -36,6 +35,7 @@ public class Profile implements Serializable {
 
     //Affectation d'un ou plusieurs roles à un profil
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.LAZY)
+    @JoinTable(name = "user_role")
     private Set<Role> roles = new HashSet<>();
 
     public Profile() {

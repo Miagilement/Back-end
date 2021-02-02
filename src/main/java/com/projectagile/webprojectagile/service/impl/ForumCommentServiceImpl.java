@@ -23,7 +23,7 @@ public class ForumCommentServiceImpl implements ForumCommentService {
 
     @Override
     public List<ForumComment> findCommentBySubjectId(int id) {
-        return this.forumCommentDao.findCommentBySubjectId(id);
+        return this.forumCommentDao.findBySubjectId(id);
     }
 
     @Override
