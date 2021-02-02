@@ -1,12 +1,12 @@
 package com.projectagile.webprojectagile.controller;
 
+import com.projectagile.webprojectagile.entity.UserLoginInfo;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.security.UserDetails.UserDetailsImpl;
 import com.projectagile.webprojectagile.utils.JwtUtils;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.UserLoginReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
-import com.projectagile.webprojectagile.vo.res.UserLoginResVO;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,7 +15,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -66,6 +65,6 @@ public class UserLoginController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        return ResultVOUtils.success(userDetails);
+        return ResultVOUtils.success(new UserLoginInfo(userDetails.getUsername(), jwt, roles));
     }
 }

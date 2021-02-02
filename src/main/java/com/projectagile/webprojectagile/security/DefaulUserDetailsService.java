@@ -3,6 +3,7 @@ package com.projectagile.webprojectagile.security;
 import com.projectagile.webprojectagile.dao.EnterpriseDao;
 import com.projectagile.webprojectagile.dao.IndividualDao;
 import com.projectagile.webprojectagile.entity.Enterprise;
+import com.projectagile.webprojectagile.entity.Individual;
 import com.projectagile.webprojectagile.security.UserDetails.UserDetailsImpl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +28,11 @@ public class DefaulUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException("User：" + userEmail + " does not exist");
         }
         Enterprise enterprise = this.enterpriseDao.findByUserEmailOrSiret(userEmail, null);
-        System.out.println(enterprise.getRoles());
-        return UserDetailsImpl.build(enterprise);
+        if(enterprise!=null){
+            return UserDetailsImpl.build(enterprise);
+        } else {
+            Individual individual = this.individualDao.findByUserEmail(userEmail);
+            return UserDetailsImpl.build(individual);
+        }
     }
 }

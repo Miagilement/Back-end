@@ -13,7 +13,7 @@ public enum ResultEnum {
     DATA_NOT(4, "No related data"),
     DATA_CHANGE(5, "Data no changed"),
     DATA_REPEAT(6, "Data is already existed"),
-    USER_NOT(7, "User is not existed"),
+    USER_NOT(7, "User does not exist"),
     USER_WRONG(8, "L'email ou mot de passe est incorrect!")
     ;
 
