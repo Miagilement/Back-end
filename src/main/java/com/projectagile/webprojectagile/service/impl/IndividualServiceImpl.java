@@ -1,7 +1,9 @@
 package com.projectagile.webprojectagile.service.impl;
 
+import com.projectagile.webprojectagile.dao.EnterpriseDao;
 import com.projectagile.webprojectagile.dao.RoleDao;
 import com.projectagile.webprojectagile.dao.IndividualDao;
+import com.projectagile.webprojectagile.entity.Enterprise;
 import com.projectagile.webprojectagile.entity.Individual;
 import com.projectagile.webprojectagile.entity.Profile;
 import com.projectagile.webprojectagile.entity.Role;
@@ -28,6 +30,8 @@ public class IndividualServiceImpl implements IndividualService {
 
     IndividualDao individualDao;
 
+    EnterpriseDao enterpriseDao;
+
     RoleDao roleDao;
 
     @Override
@@ -51,8 +55,9 @@ public class IndividualServiceImpl implements IndividualService {
 
     @Override
     public boolean isExist(Individual individual) {
-        Profile profileExist = individualDao.findByUserEmail(individual.getUserEmail());
-        return profileExist != null;
+        Enterprise enterpriseExist = enterpriseDao.findByUserEmailOrSiret(individual.getUserEmail(), null);
+        Individual individualExist = individualDao.findByUserEmail(individual.getUserEmail());
+        return enterpriseExist != null || individualExist != null;
     }
 
     @Override

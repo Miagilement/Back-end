@@ -1,8 +1,10 @@
 package com.projectagile.webprojectagile.service.impl;
 
 import com.projectagile.webprojectagile.dao.EnterpriseDao;
+import com.projectagile.webprojectagile.dao.IndividualDao;
 import com.projectagile.webprojectagile.dao.RoleDao;
 import com.projectagile.webprojectagile.entity.Enterprise;
+import com.projectagile.webprojectagile.entity.Individual;
 import com.projectagile.webprojectagile.entity.Role;
 import com.projectagile.webprojectagile.enums.RoleList;
 import com.projectagile.webprojectagile.service.EnterpriseService;
@@ -26,6 +28,8 @@ import java.util.Set;
 public class EnterpriseServiceImpl implements EnterpriseService {
 
     EnterpriseDao enterpriseDao;
+
+    IndividualDao individualDao;
 
     RoleDao roleDao;
 
@@ -52,6 +56,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Override
     public boolean isExistEnterprise(Enterprise enterprise) {
         Enterprise enterpriseExist = enterpriseDao.findByUserEmailOrSiret(enterprise.getUserEmail(), enterprise.getSiret());
-        return enterpriseExist != null;
+        Individual individualExist = individualDao.findByUserEmail(enterprise.getUserEmail());
+        return enterpriseExist != null || individualExist != null;
     }
 }
