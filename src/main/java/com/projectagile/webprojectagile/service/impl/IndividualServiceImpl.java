@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -62,6 +63,15 @@ public class IndividualServiceImpl implements IndividualService {
 
     @Override
     public Individual updateUserInfo(Individual individual) {
-        return this.individualDao.save(individual);
+        Individual individual1 = individualDao.findById(individual.getUid()).get();
+        if(individual1 != null){
+            individual1.setUserName(individual.getUserName());
+            individual1.setUserType(individual.getUserType());
+            individual1.setUserPassword(individual.getUserPassword());
+            return this.individualDao.save(individual1);
+        } else {
+            return null;
+        }
+
     }
 }

@@ -22,9 +22,6 @@ public class HelloController {
 
     TestClassServiceImpl testClassService;
 
-    @RequestMapping(path = "/hello", method = RequestMethod.GET)
-
-
     @PostMapping("/hello")
     public String helloTest(){
         System.out.println("helloTest called");

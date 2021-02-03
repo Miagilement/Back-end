@@ -24,6 +24,8 @@ import java.util.Set;
 @Table
 public class Individual extends Profile {
 
+
+
     @NotNull(message = "Le champ pseudo ne doit pas être vide")
     @Length(max = 30, message = "Le pseudo ne doit pas dépasser les 30 caractères")
     private String userName;

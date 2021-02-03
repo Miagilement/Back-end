@@ -52,7 +52,7 @@ public class IndividualController {
         if (profile != null) {
             return ResultVOUtils.success(profile);
         } else {
-            return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
+            return ResultVOUtils.error(ResultEnum.USER_NOT);
         }
     }
 

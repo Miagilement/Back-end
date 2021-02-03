@@ -20,15 +20,19 @@ import java.util.Date;
 public class JwtUtils {
 
 
-    private Key key = generateKey();
 
     public String generateToken(Authentication authentication) {
+
+        Key key = generateKey();
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
         Long nowMillis = System.currentTimeMillis();
-        Long expMillis = nowMillis + 1000*2592000;
+        Long expMillis = nowMillis + 1000*1296000;
         Date exp = new Date(expMillis);
+
+        System.out.println(new Date());
+        System.out.println(exp);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
@@ -36,13 +40,13 @@ public class JwtUtils {
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date())
                 .setExpiration(exp)
-                .signWith(signatureAlgorithm, this.key)
+                .signWith(signatureAlgorithm, key)
                 .compact();
     }
 
 
     public String getUserEmailFromJwtToken(String token) {
-        return Jwts.parser().setSigningKey(this.key).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(generateKey()).parseClaimsJws(token).getBody().getSubject();
     }
 
     private static SecretKey generateKey() {
@@ -53,7 +57,7 @@ public class JwtUtils {
 
     public boolean validateJwtToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(key).parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(generateKey()).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException e) {
             log.error("Invalid JWT signature: {}", e.getMessage());

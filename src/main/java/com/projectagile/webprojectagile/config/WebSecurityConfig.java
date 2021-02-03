@@ -50,11 +50,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         String[] listLoginPathExclude = {"/user/**"};
-
+        String[] listPathExcludeNoAuthentication = {"/forum/comment/find-all-comments-by-subject/**", "/forum/find-all-forum-subjects", "/info/individual/find-by-id/**"};
+        String[] listPathExcludeIndividual = {"/info/individual/update-individual-info"};
 
         httpSecurity.cors().and().csrf().disable()
-                .authorizeRequests().antMatchers(listLoginPathExclude).permitAll()
-//                .and().authorizeRequests().anyRequest().authenticated()
+                .authorizeRequests()
+                .antMatchers(listLoginPathExclude).permitAll()
+//                .antMatchers(listPathExcludeNoAuthentication).permitAll()
+//                .antMatchers(listPathExcludeIndividual).hasAuthority("USER_INDIVIDUAL")
+//                .anyRequest().authenticated()
                 .and().logout().logoutUrl("/user/logout").logoutSuccessHandler(new CustomLogoutSuccessHandler()).deleteCookies("JSESSIONID").permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {

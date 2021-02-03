@@ -19,36 +19,35 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@AllArgsConstructor(onConstructor = @__(@Autowired))
 @NoArgsConstructor
 public class AuthTokenFilter extends OncePerRequestFilter {
 
+    @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
     private DefaulUserDetailsService defaulUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-            String jwt = parseJwt(httpServletRequest);
-            if (jwt != null && jwtUtils.validateJwtToken(jwt)){
-                String userEmail = jwtUtils.getUserEmailFromJwtToken(jwt);
-                UserDetails userDetails = defaulUserDetailsService.loadUserByUsername(userEmail);
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            }
+        String jwt = parseJwt(httpServletRequest);
+        if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
+            String userEmail = jwtUtils.getUserEmailFromJwtToken(jwt);
+            UserDetails userDetails = defaulUserDetailsService.loadUserByUsername(userEmail);
+            System.out.println(userDetails.getAuthorities());
+            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        }
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
     private String parseJwt(HttpServletRequest request) {
         String headerAuth = request.getHeader("Authorization");
-
         if (StringUtils.hasText(headerAuth) && headerAuth.startsWith("Bearer ")) {
             return headerAuth.substring(7, headerAuth.length());
         }
-
         return null;
     }
 }
