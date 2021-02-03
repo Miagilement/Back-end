@@ -40,7 +40,7 @@ public class UserRegisterController {
     }
 
     @PostMapping("/individual/register")
-    public BaseResVO particulierRegister(@RequestBody IndividualReqVO individualReqVO) {
+    public BaseResVO individualRegister(@Valid @RequestBody IndividualReqVO individualReqVO) {
         System.out.println(individualReqVO);
         if (individualService.isExist(individualReqVO.getIndividual())) {
             String[] listString = {"L'utilisateur existe déja, veuillez vous connecter directement!"};
