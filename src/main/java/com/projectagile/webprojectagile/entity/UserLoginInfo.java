@@ -9,7 +9,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserLoginInfo {
 
-    private String userName;
+    private String userEmail;
 
     private String jwt;
 
