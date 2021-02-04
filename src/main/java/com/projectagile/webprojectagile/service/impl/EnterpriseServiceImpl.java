@@ -62,6 +62,9 @@ public class EnterpriseServiceImpl implements EnterpriseService {
 
     @Override
     public List<Enterprise> findEnterpriseByAttribute(String region, String sector) {
+        if(region.equals("any")&&sector.equals("any")){
+            return (List<Enterprise>) enterpriseDao.findAll();
+        }
         if(region.equals("any")){
             return enterpriseDao.findByAttribute("", sector);
         }
