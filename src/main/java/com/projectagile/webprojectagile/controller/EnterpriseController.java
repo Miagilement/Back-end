@@ -43,4 +43,9 @@ public class EnterpriseController {
             return ResultVOUtils.error(ResultEnum.PARAM_VERIFY_FALL);
         }
     }
+
+    @PostMapping("/find-by-attribute/{region}/{sector}")
+    public BaseResVO findEnterpriseByAttribute(@PathVariable(value = "region") String region, @PathVariable(value = "sector") String sector){
+        return ResultVOUtils.success(enterpriseService.findEnterpriseByAttribute(region, sector));
+    }
 }

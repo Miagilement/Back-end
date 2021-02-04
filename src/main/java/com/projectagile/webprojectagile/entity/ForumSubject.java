@@ -32,7 +32,7 @@ public class ForumSubject {
     @NotNull(message = "Le sujet dans le forum ne doit pas être vide")
     private String text;
 
-    @NotNull(message = "Le authorId doit être renseigné pour le sujet")
+//    @NotNull(message = "Le authorId doit être renseigné pour le sujet")
     private String authorId;
 
     private Date datePost;

@@ -32,7 +32,7 @@ public class ForumComment {
     @NotNull(message = "Le commentaire de doit pas être vide")
     private String text;
 
-    @NotNull(message = "Le authorId doit être renseigné pour le commentaire")
+//    @NotNull(message = "Le authorId doit être renseigné pour le commentaire")
     private String authorId;
 
     private Date dateComment;

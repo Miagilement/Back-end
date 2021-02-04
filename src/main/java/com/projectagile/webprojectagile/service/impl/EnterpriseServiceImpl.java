@@ -59,4 +59,15 @@ public class EnterpriseServiceImpl implements EnterpriseService {
         Individual individualExist = individualDao.findByUserEmail(enterprise.getUserEmail());
         return enterpriseExist != null || individualExist != null;
     }
+
+    @Override
+    public List<Enterprise> findEnterpriseByAttribute(String region, String sector) {
+        if(region.equals("any")){
+            return enterpriseDao.findByAttribute("", sector);
+        }
+        if(sector.equals("any")){
+            return enterpriseDao.findByAttribute(region, "");
+        }
+        return enterpriseDao.findByAttribute(region, sector);
+    }
 }
