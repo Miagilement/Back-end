@@ -55,6 +55,7 @@ public class UserLoginController {
 
     @PostMapping("/login")
     public BaseResVO login(@RequestBody UserLoginReqVO userLoginReqVO){
+        System.out.println(userLoginReqVO);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userLoginReqVO.getUserEmail(), userLoginReqVO.getUserPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -65,6 +66,6 @@ public class UserLoginController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        return ResultVOUtils.success(new UserLoginInfo(userDetails.getUsername(), jwt, roles));
+        return ResultVOUtils.success(new UserLoginInfo(userDetails.getUid(), userDetails.getUsername(), jwt, roles));
     }
 }

@@ -9,6 +9,8 @@ import java.util.List;
 @AllArgsConstructor
 public class UserLoginInfo {
 
+    private String uid;
+
     private String userEmail;
 
     private String jwt;
