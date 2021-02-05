@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
+/**
+ * Le controleur recoit les requetes du front et renvoie des réponses
+ * Ici : reception des requetes relatives aux sujets du forum
+ */
+
 @RestController
 @RequestMapping("/forum")
 @AllArgsConstructor(onConstructor = @__(@Autowired))

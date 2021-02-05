@@ -1,6 +1,6 @@
 package com.projectagile.webprojectagile.controller;
 
-import com.projectagile.webprojectagile.entity.UserLoginInfo;
+import com.projectagile.webprojectagile.constant.UserLoginInfo;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.security.UserDetails.UserDetailsImpl;
 import com.projectagile.webprojectagile.utils.JwtUtils;
@@ -18,13 +18,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controleur pour la connexion des entreprises et particuliers
+ * Le controleur recoit les requetes du front et renvoie des réponses
+ * Ici : reception des requetes relatives aux formulaire de connexion
+ */
+
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class UserLoginController {
 
     JwtUtils jwtUtils;
-
     AuthenticationManager authenticationManager;
 
     @PostMapping("/logout-success")

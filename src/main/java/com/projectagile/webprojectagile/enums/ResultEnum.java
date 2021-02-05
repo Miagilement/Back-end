@@ -2,6 +2,12 @@ package com.projectagile.webprojectagile.enums;
 
 import lombok.Getter;
 
+/**
+ * Enumération des types de codes et messages d'erreurs (statuts)
+ * suite à l'execution des requêtes HTTP
+ */
+
+
 @Getter
 public enum ResultEnum {
     

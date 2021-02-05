@@ -3,6 +3,10 @@ package com.projectagile.webprojectagile.enums;
 
 import lombok.Getter;
 
+/**
+ * Enumération des rôles utilisateurs
+ */
+
 @Getter
 public enum RoleList {
     USER_ENTERPRISE("USER_ENTERPRISE"),

@@ -12,13 +12,13 @@ import java.util.List;
 
 public interface IndividualService {
 
-    Individual insertProfile(Individual individual);
+    Individual insertIndividual(Individual individual);
 
-    List<Individual> findAllProfile();
+    List<Individual> findAllIndividual();
 
-    Individual findProfileById(String uid);
+    Individual findIndividualById(String uid);
 
-    boolean isExist(Individual individual);
+    boolean isExistIndividual(Individual individual);
 
-    Individual updateUserInfo(Individual individual);
+    Individual updateIndividualInfo(Individual individual);
 }

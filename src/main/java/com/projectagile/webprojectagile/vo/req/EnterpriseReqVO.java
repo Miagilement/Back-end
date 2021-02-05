@@ -7,7 +7,8 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 /**
- * Class pour request VO Entreprise
+ * Class pour requetes VO Entreprise
+ * View Object permet de faciliter la récupération de données du front issues de requetes
  */
 
 @Data

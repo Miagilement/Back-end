@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Le controleur recoit les requêtes du front-end
+ * Le controleur recoit les requetes du front et renvoie des réponses
+ * Ici : reception des requetes relatives à l'espace membre des individus
  */
 
 @RestController
 @RequestMapping("/info/individual")
-// Pour chaque controleur, il faut copier le AllArgsConstructor tel quel
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class IndividualController {
 
     IndividualServiceImpl individualService;
 
     @PostMapping("/find-all-individual")
-    public BaseResVO findAllParticulier() {
-        List<Individual> userList = individualService.findAllProfile();
+    public BaseResVO findAllIndividual() {
+        List<Individual> userList = individualService.findAllIndividual();
         if (userList != null) {
             return ResultVOUtils.success(userList);
         } else {
@@ -37,8 +37,8 @@ public class IndividualController {
 
     //le uid est récupéré dans l'url pour le renvoyer au front-end
     @PostMapping("/find-by-id/{uid}")
-    public BaseResVO findParticulierById(@PathVariable String uid){
-        Profile profile = individualService.findProfileById(uid);
+    public BaseResVO findIndividualById(@PathVariable String uid){
+        Profile profile = individualService.findIndividualById(uid);
         if(profile != null){
             return ResultVOUtils.success(profile);
         } else {
@@ -47,14 +47,13 @@ public class IndividualController {
     }
 
     @PostMapping("/update-individual-info")
-    public BaseResVO updateUserInfo(@RequestBody IndividualReqVO individualReqVO) {
-        Profile profile = individualService.updateUserInfo(individualReqVO.getIndividual());
+    public BaseResVO updateIndividualInfo(@RequestBody IndividualReqVO individualReqVO) {
+        Profile profile = individualService.updateIndividualInfo(individualReqVO.getIndividual());
         if (profile != null) {
             return ResultVOUtils.success(profile);
         } else {
             return ResultVOUtils.error(ResultEnum.USER_NOT);
         }
     }
-
 
 }

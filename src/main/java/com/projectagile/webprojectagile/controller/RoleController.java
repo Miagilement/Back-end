@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Ajout des rôles dans la base de données
+ * Le controleur recoit les requetes du front et renvoie des réponses
+ */
+
 @RestController
 @RequestMapping("/admin/role")
 // Pour chaque controleur, il faut copier le AllArgsConstructor tel quel

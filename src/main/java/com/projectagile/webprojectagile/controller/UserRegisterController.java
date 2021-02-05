@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 /**
- * Controler pour l'inscription des entreprises et particuliers
+ * Controleur pour l'inscription des entreprises et particuliers
+ * Le controleur recoit les requetes du front et renvoie des réponses
+ * Ici : reception des requetes relatives aux formulaires d'inscription entreprises & individus
  */
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -42,11 +44,11 @@ public class UserRegisterController {
     @PostMapping("/individual/register")
     public BaseResVO individualRegister(@Valid @RequestBody IndividualReqVO individualReqVO) {
         System.out.println(individualReqVO);
-        if (individualService.isExist(individualReqVO.getIndividual())) {
+        if (individualService.isExistIndividual(individualReqVO.getIndividual())) {
             String[] listString = {"L'utilisateur existe déja, veuillez vous connecter directement!"};
             return ResultVOUtils.error(ResultEnum.DATA_REPEAT, listString);
         } else {
-            return ResultVOUtils.success(individualService.insertProfile(individualReqVO.getIndividual()));
+            return ResultVOUtils.success(individualService.insertIndividual(individualReqVO.getIndividual()));
         }
     }
 }

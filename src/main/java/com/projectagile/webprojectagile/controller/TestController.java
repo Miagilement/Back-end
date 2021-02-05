@@ -18,7 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping(path = "/test")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class HelloController {
+public class TestController {
 
     TestClassServiceImpl testClassService;
 
