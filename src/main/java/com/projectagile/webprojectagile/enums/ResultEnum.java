@@ -21,7 +21,8 @@ public enum ResultEnum {
     DATA_REPEAT(6, "Data is already existed"),
     USER_NOT(7, "User does not exist"),
     USER_WRONG(8, "L'email ou mot de passe est incorrect!"),
-    USER_ALREADY_EXIST(9, "Cette adresse email est déjà utilisée!")
+    USER_ALREADY_EXIST(9, "Cette adresse email est déjà utilisée!"),
+    USER_EMAIL_NOT(10, "Le lien ne marche pas!")
     ;
 
     private Integer code;

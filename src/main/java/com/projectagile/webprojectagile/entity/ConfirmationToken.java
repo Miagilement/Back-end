@@ -21,12 +21,11 @@ import javax.persistence.TemporalType;
 @Entity
 @Table
 @Data
-@NoArgsConstructor
 public class ConfirmationToken {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="token_id")
+    @GeneratedValue
+    @Column
     private long tokenid;
 
     @Column

@@ -6,9 +6,11 @@ import com.projectagile.webprojectagile.dao.ProfileDao;
 import com.projectagile.webprojectagile.entity.ConfirmationToken;
 import com.projectagile.webprojectagile.entity.Profile;
 import com.projectagile.webprojectagile.enums.ResultEnum;
+import com.projectagile.webprojectagile.service.ProfileService;
 import com.projectagile.webprojectagile.service.impl.EmailServiceImpl;
 import com.projectagile.webprojectagile.service.impl.EnterpriseServiceImpl;
 import com.projectagile.webprojectagile.service.impl.IndividualServiceImpl;
+import com.projectagile.webprojectagile.service.impl.ProfileServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.EnterpriseReqVO;
 import com.projectagile.webprojectagile.vo.req.IndividualReqVO;
@@ -38,6 +40,7 @@ public class UserRegisterController {
     EnterpriseServiceImpl enterpriseService;
     IndividualServiceImpl individualService;
     EmailServiceImpl emailService;
+    ProfileServiceImpl profileService;
     //retirer les dao
     //créer des services qui appelent les dao
 
@@ -89,19 +92,17 @@ public class UserRegisterController {
  */
 
     @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
-    public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token")String confirmationToken)
+    public BaseResVO confirmUserAccount(@RequestParam("token")String confirmationToken)
     {
         ConfirmationToken token = emailService.findToken(confirmationToken);
         if(token != null)
         {
-            Profile user = for.findByUserEmail(token.getProfile().getUserEmail());
+            Profile user = profileService.findProfileByEmail(token.getProfile().getUserEmail());
             user.setEnabled(true);
-            profileDao.save(user);
-            modelAndView.setViewName("accountVerified");
+            profileService.updateProfile(user);
+            return ResultVOUtils.success(null);
         } else {
-            modelAndView.addObject("message","Le lien ne marche pas!");
-            modelAndView.setViewName("error");
+            return ResultVOUtils.error(ResultEnum.USER_EMAIL_NOT);
         }
-        return modelAndView;
     }
 }
