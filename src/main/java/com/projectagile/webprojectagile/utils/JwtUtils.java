@@ -45,6 +45,7 @@ public class JwtUtils {
     }
 
 
+
     public String getUidFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(generateKey()).parseClaimsJws(token).getBody().getSubject();
     }

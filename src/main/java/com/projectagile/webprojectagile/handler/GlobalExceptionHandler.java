@@ -6,12 +6,10 @@ import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import javax.xml.transform.Result;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -63,4 +61,5 @@ public class GlobalExceptionHandler {
         log.warn(e.getMessage());
         return ResultVOUtils.error(ResultEnum.USER_WRONG);
     }
+
 }

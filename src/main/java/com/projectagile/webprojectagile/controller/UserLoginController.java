@@ -19,6 +19,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * Controleur pour la connexion des entreprises et particuliers
+ * Le controleur recoit les requetes du front et renvoie des réponses
+ * Ici : reception des requetes relatives aux formulaire de connexion
+ */
+
 @RestController
 @RequestMapping("/user")
 @AllArgsConstructor(onConstructor = @__(@Autowired))

@@ -34,6 +34,8 @@ public class Profile implements Serializable {
     @Length(min = 6, message = "Le mot de passe doit être supérieur à 6 caractères")
     private String userPassword;
 
+    private boolean isEnabled;
+
     //Affectation d'un ou plusieurs roles à un profil
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role")

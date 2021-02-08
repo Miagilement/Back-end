@@ -13,9 +13,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Le controleur recoit les requetes du front et renvoie des réponses
+ * Ici : reception des requetes relatives aux commentaires sur les sujets du forum
+ */
+
 @RestController
 @RequestMapping("/forum/comment")
-// Pour chaque controleur, il faut copier le AllArgsConstructor tel quel
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ForumCommentController {
 
@@ -30,16 +34,6 @@ public class ForumCommentController {
             return ResultVOUtils.error();
         }
     }
-
-//    @PostMapping("/find-comments-by-id/{id}")
-//    public BaseResVO findCommentsById(@PathVariable int id){
-//        ForumComment forumComment = this.forumCommentService.findForumCommentById(id);
-//        if(forumComment != null){
-//            return ResultVOUtils.success(forumComment);
-//        } else {
-//            return ResultVOUtils.error();
-//        }
-//    }
 
     @PostMapping("/add-forum-comment")
     public BaseResVO addComments(@RequestBody ForumCommentReqVO forumCommentReqVO){

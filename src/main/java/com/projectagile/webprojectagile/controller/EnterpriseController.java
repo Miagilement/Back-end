@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Le controleur recoit les requêtes du front-end
+ * Le controleur recoit les requetes du front et renvoie des réponses
+ * Ici : reception des requetes relatives à la liste des fiches entreprise, détails entreprise et filtrages
  */
 
 @RestController
 @RequestMapping("/info/enterprise")
-// Pour chaque controleur, il faut copier le AllArgsConstructor tel quel
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class EnterpriseController {
 
@@ -33,7 +33,7 @@ public class EnterpriseController {
         }
     }
 
-    //le uid est récupéré dans l'url pour le renvoyer au front-end
+    //le uid est récupéré dans l'url pour le renvoyer au front-end (url dynamique)
     @PostMapping("/find-by-id/{uid}")
     public BaseResVO findEnterpriseById(@PathVariable String uid){
         Enterprise enterprise = enterpriseService.findByIdEnterprise(uid);

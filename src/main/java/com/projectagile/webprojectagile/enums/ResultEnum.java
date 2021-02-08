@@ -2,6 +2,11 @@ package com.projectagile.webprojectagile.enums;
 
 import lombok.Getter;
 
+/**
+ * Enumération des types de codes et messages d'erreurs (statuts)
+ * suite à l'execution des requêtes HTTP
+ */
+
 @Getter
 public enum ResultEnum {
     
@@ -15,7 +20,9 @@ public enum ResultEnum {
     DATA_REPEAT(6, "Data is already existed"),
     USER_NOT(7, "User does not exist"),
     USER_WRONG(8, "L'email ou mot de passe est incorrect!"),
-    LOGIN_TIMEOUT(9, "Token is expired!")
+    LOGIN_TIMEOUT(9, "Token is expired!"),
+    USER_ALREADY_EXIST(9, "Cette adresse email est déjà utilisée!"),
+    USER_EMAIL_NOT(10, "Le lien ne marche pas!"),
     ;
 
     private Integer code;
