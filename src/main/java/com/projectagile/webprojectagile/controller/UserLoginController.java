@@ -78,7 +78,5 @@ public class UserLoginController {
         return ResultVOUtils.success(new UserLoginInfo(userDetails.getUid(), userDetails.getUsername(), jwt, roles));
     }
 
-
-
 }
 

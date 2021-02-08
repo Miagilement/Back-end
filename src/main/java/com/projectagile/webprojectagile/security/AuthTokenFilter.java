@@ -25,6 +25,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
 
+    @Autowired
     private RedisUtils redisUtils;
 
     @Autowired
@@ -42,7 +43,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             } else {
-                httpServletRequest.getRequestDispatcher("/user/logout-success").forward(httpServletRequest, httpServletResponse );
+                httpServletRequest.getRequestDispatcher("/user/login-timeout").forward(httpServletRequest, httpServletResponse );
             }
         }
         filterChain.doFilter(httpServletRequest, httpServletResponse);

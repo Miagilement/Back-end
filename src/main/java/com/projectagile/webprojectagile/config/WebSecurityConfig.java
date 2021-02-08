@@ -5,6 +5,7 @@ et par conséquent, elle sera analysée par Spring durant l'exécution de  l'app
 package com.projectagile.webprojectagile.config;
 
 import com.projectagile.webprojectagile.security.AuthTokenFilter;
+import com.projectagile.webprojectagile.security.CustomLogoutHandler;
 import com.projectagile.webprojectagile.security.CustomLogoutSuccessHandler;
 import com.projectagile.webprojectagile.security.DefaultUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
@@ -58,8 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(listLoginPathExclude).permitAll()
 //                .antMatchers(listPathExcludeNoAuthentication).permitAll()
 //                .antMatchers(listPathExcludeIndividual).hasAuthority("USER_INDIVIDUAL")
-//                .anyRequest().authenticated()
-                .and().logout().logoutUrl("/user/logout").logoutSuccessHandler(new CustomLogoutSuccessHandler()).deleteCookies("JSESSIONID").permitAll()
+                .anyRequest().authenticated()
+                .and().logout().logoutUrl("/user/logout").addLogoutHandler(new CustomLogoutHandler()).logoutSuccessHandler(new CustomLogoutSuccessHandler()).permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
                     @Override
