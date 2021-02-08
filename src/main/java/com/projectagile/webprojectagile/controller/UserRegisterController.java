@@ -6,6 +6,7 @@ import com.projectagile.webprojectagile.dao.ProfileDao;
 import com.projectagile.webprojectagile.entity.ConfirmationToken;
 import com.projectagile.webprojectagile.entity.Profile;
 import com.projectagile.webprojectagile.enums.ResultEnum;
+import com.projectagile.webprojectagile.service.impl.EmailServiceImpl;
 import com.projectagile.webprojectagile.service.impl.EnterpriseServiceImpl;
 import com.projectagile.webprojectagile.service.impl.IndividualServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
@@ -36,12 +37,10 @@ public class UserRegisterController {
     //injection de dépendances ? @Autowired
     EnterpriseServiceImpl enterpriseService;
     IndividualServiceImpl individualService;
+    EmailServiceImpl emailService;
     //retirer les dao
     //créer des services qui appelent les dao
-    IndividualDao individualDao;
-    ProfileDao profileDao;
-    @Autowired
-    private ConfirmationTokenDao confirmationTokenDao;
+
 
     //Pour l'entreprise (lié au formulaire inscription entreprise)
     @PostMapping("/enterprise/register")
@@ -52,7 +51,7 @@ public class UserRegisterController {
             return ResultVOUtils.error(ResultEnum.DATA_REPEAT, listString);
         } else {
             ConfirmationToken confirmationToken = new ConfirmationToken(enterpriseReqVO.getEnterprise());
-            confirmationTokenDao.save(confirmationToken);
+            emailService.saveToken(confirmationToken);
             return ResultVOUtils.success(enterpriseService.insertEnterprise(enterpriseReqVO.getEnterprise()));
         }
     }
@@ -66,7 +65,13 @@ public class UserRegisterController {
         } else {
             individualService.insertIndividual(individualReqVO.getIndividual());
             ConfirmationToken confirmationToken = new ConfirmationToken(individualReqVO.getIndividual());
-            confirmationTokenDao.save(confirmationToken);
+            emailService.saveToken(confirmationToken);
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setTo(individualReqVO.getIndividual().getUserEmail());
+            mailMessage.setSubject("Complete Registration!");
+            mailMessage.setText("Cliquez sur ce lien pour completer votre inscription : "
+                    +"http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
+            emailService.sendEmail(mailMessage);
             return ResultVOUtils.success(individualReqVO.getIndividual());
         }
     }
@@ -78,34 +83,25 @@ public class UserRegisterController {
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setText("Cliquez sur ce lien pour completer votre inscription : "
                     +"http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
-
             emailService.sendEmail(mailMessage);
-
             modelAndView.addObject("emailId", userEntity.getEmailId());
-
             modelAndView.setViewName("successfulRegisteration");
-
  */
 
     @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
     public ModelAndView confirmUserAccount(ModelAndView modelAndView, @RequestParam("token")String confirmationToken)
     {
-
-        ConfirmationToken token = confirmationTokenDao.findByConfirmationToken(confirmationToken);
-
+        ConfirmationToken token = emailService.findToken(confirmationToken);
         if(token != null)
         {
-            Profile user = profileDao.findByUserEmail(token.getProfile().getUserEmail());
+            Profile user = for.findByUserEmail(token.getProfile().getUserEmail());
             user.setEnabled(true);
             profileDao.save(user);
             modelAndView.setViewName("accountVerified");
-        }
-        else
-        {
+        } else {
             modelAndView.addObject("message","Le lien ne marche pas!");
             modelAndView.setViewName("error");
         }
-
         return modelAndView;
     }
 }
