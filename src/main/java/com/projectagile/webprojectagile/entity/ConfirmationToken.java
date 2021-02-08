@@ -21,6 +21,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table
 @Data
+@NoArgsConstructor
 public class ConfirmationToken {
 
     @Id

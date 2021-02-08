@@ -22,7 +22,7 @@ public enum ResultEnum {
     USER_NOT(7, "User does not exist"),
     USER_WRONG(8, "L'email ou mot de passe est incorrect!"),
     USER_ALREADY_EXIST(9, "Cette adresse email est déjà utilisée!"),
-    USER_EMAIL_NOT(10, "Le lien ne marche pas!")
+    USER_EMAIL_NOT(10, "Le lien ne marche pas!"),
     ;
 
     private Integer code;

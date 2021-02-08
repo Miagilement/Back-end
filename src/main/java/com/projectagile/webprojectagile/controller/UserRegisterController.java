@@ -4,6 +4,8 @@ import com.projectagile.webprojectagile.dao.ConfirmationTokenDao;
 import com.projectagile.webprojectagile.dao.IndividualDao;
 import com.projectagile.webprojectagile.dao.ProfileDao;
 import com.projectagile.webprojectagile.entity.ConfirmationToken;
+import com.projectagile.webprojectagile.entity.Enterprise;
+import com.projectagile.webprojectagile.entity.Individual;
 import com.projectagile.webprojectagile.entity.Profile;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.ProfileService;
@@ -53,9 +55,16 @@ public class UserRegisterController {
             String[] listString = {"Le SIRET ou email est déja inscrit, veuillez vous connecter directement!"};
             return ResultVOUtils.error(ResultEnum.DATA_REPEAT, listString);
         } else {
+            Enterprise enterprise = enterpriseService.insertEnterprise(enterpriseReqVO.getEnterprise());
             ConfirmationToken confirmationToken = new ConfirmationToken(enterpriseReqVO.getEnterprise());
             emailService.saveToken(confirmationToken);
-            return ResultVOUtils.success(enterpriseService.insertEnterprise(enterpriseReqVO.getEnterprise()));
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setTo(enterpriseReqVO.getEnterprise().getUserEmail());
+            mailMessage.setSubject("Complete Registration!");
+            mailMessage.setText("Cliquez sur ce lien pour completer votre inscription : "
+                    +"http://localhost:8000/user/confirm-account?token="+confirmationToken.getConfirmationToken());
+            emailService.sendEmail(mailMessage);
+            return ResultVOUtils.success(enterprise);
         }
     }
 
@@ -66,16 +75,16 @@ public class UserRegisterController {
             String[] listString = {"L'utilisateur existe déja, veuillez vous connecter directement!"};
             return ResultVOUtils.error(ResultEnum.DATA_REPEAT, listString);
         } else {
-            individualService.insertIndividual(individualReqVO.getIndividual());
+            Individual individual = individualService.insertIndividual(individualReqVO.getIndividual());
             ConfirmationToken confirmationToken = new ConfirmationToken(individualReqVO.getIndividual());
             emailService.saveToken(confirmationToken);
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(individualReqVO.getIndividual().getUserEmail());
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setText("Cliquez sur ce lien pour completer votre inscription : "
-                    +"http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
+                    +"http://localhost:8000/user/confirm-account?token="+confirmationToken.getConfirmationToken());
             emailService.sendEmail(mailMessage);
-            return ResultVOUtils.success(individualReqVO.getIndividual());
+            return ResultVOUtils.success(individual);
         }
     }
 
@@ -92,7 +101,7 @@ public class UserRegisterController {
  */
 
     @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
-    public BaseResVO confirmUserAccount(@RequestParam("token")String confirmationToken)
+    public BaseResVO confirmUserAccount(@RequestParam("token") String confirmationToken)
     {
         ConfirmationToken token = emailService.findToken(confirmationToken);
         if(token != null)
@@ -100,7 +109,7 @@ public class UserRegisterController {
             Profile user = profileService.findProfileByEmail(token.getProfile().getUserEmail());
             user.setEnabled(true);
             profileService.updateProfile(user);
-            return ResultVOUtils.success(null);
+            return ResultVOUtils.success(user);
         } else {
             return ResultVOUtils.error(ResultEnum.USER_EMAIL_NOT);
         }
