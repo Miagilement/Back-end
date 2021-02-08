@@ -4,6 +4,7 @@ import com.projectagile.webprojectagile.entity.UserLoginInfo;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.security.UserDetails.UserDetailsImpl;
 import com.projectagile.webprojectagile.utils.JwtUtils;
+import com.projectagile.webprojectagile.utils.RedisUtils;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.UserLoginReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
@@ -24,6 +25,8 @@ import java.util.stream.Collectors;
 public class UserLoginController {
 
     JwtUtils jwtUtils;
+
+    RedisUtils redisUtils;
 
     AuthenticationManager authenticationManager;
 
@@ -53,19 +56,29 @@ public class UserLoginController {
         return ResultVOUtils.error(ResultEnum.USER_WRONG);
     }
 
+    @PostMapping("/login-timeout")
+    public BaseResVO loginTimeout() {
+        return ResultVOUtils.error(ResultEnum.LOGIN_TIMEOUT);
+    }
+
     @PostMapping("/login")
     public BaseResVO login(@RequestBody UserLoginReqVO userLoginReqVO){
-        System.out.println(userLoginReqVO);
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userLoginReqVO.getUserEmail(), userLoginReqVO.getUserPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        System.out.println(authentication.getPrincipal());
-        String jwt = jwtUtils.generateToken(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        System.out.println(authentication);
+        String jwt = jwtUtils.generateToken(authentication);
+        System.out.println(jwtUtils.getUidFromJwtToken(jwt));
+        System.out.println();
+        redisUtils.set(userDetails.getUid(), jwt, 1296000);
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
         return ResultVOUtils.success(new UserLoginInfo(userDetails.getUid(), userDetails.getUsername(), jwt, roles));
     }
+
+
+
 }
+

@@ -14,7 +14,8 @@ public enum ResultEnum {
     DATA_CHANGE(5, "Data no changed"),
     DATA_REPEAT(6, "Data is already existed"),
     USER_NOT(7, "User does not exist"),
-    USER_WRONG(8, "L'email ou mot de passe est incorrect!")
+    USER_WRONG(8, "L'email ou mot de passe est incorrect!"),
+    LOGIN_TIMEOUT(9, "Token is expired!")
     ;
 
     private Integer code;

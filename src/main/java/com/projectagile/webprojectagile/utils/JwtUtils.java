@@ -37,7 +37,7 @@ public class JwtUtils {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         return Jwts.builder()
-                .setSubject(userDetails.getUsername())
+                .setSubject(userDetails.getUid())
                 .setIssuedAt(new Date())
                 .setExpiration(exp)
                 .signWith(signatureAlgorithm, key)
@@ -45,7 +45,7 @@ public class JwtUtils {
     }
 
 
-    public String getUserEmailFromJwtToken(String token) {
+    public String getUidFromJwtToken(String token) {
         return Jwts.parser().setSigningKey(generateKey()).parseClaimsJws(token).getBody().getSubject();
     }
 

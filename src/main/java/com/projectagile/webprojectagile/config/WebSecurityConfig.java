@@ -6,7 +6,7 @@ package com.projectagile.webprojectagile.config;
 
 import com.projectagile.webprojectagile.security.AuthTokenFilter;
 import com.projectagile.webprojectagile.security.CustomLogoutSuccessHandler;
-import com.projectagile.webprojectagile.security.DefaulUserDetailsService;
+import com.projectagile.webprojectagile.security.DefaultUserDetailsService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,7 +35,7 @@ import java.io.IOException;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    DefaulUserDetailsService userDetailsService;
+    DefaultUserDetailsService userDetailsService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder(){

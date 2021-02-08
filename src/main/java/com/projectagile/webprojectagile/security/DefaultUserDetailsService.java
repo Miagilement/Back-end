@@ -19,10 +19,8 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-public class DefaulUserDetailsService implements UserDetailsService {
+public class DefaultUserDetailsService implements UserDetailsService {
 
-    private EnterpriseDao enterpriseDao;
-    private IndividualDao individualDao;
     private ProfileDao profileDao;
 
     @Override
@@ -40,5 +38,14 @@ public class DefaulUserDetailsService implements UserDetailsService {
 //            Individual individual = this.individualDao.findByUserEmail(userEmail);
 //            return UserDetailsImpl.build(individual);
 //        }
+    }
+
+    public UserDetails loadUserByUid(String uid) throws UsernameNotFoundException {
+        if (uid.isEmpty()) {
+            log.info("User：{} does not exist", uid);
+            throw new UsernameNotFoundException("User：" + uid + " does not exist");
+        }
+        Profile profile = profileDao.findById(uid).get();
+        return UserDetailsImpl.build(profile);
     }
 }

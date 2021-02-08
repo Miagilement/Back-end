@@ -1,7 +1,7 @@
 package com.projectagile.webprojectagile.security;
 
 import com.projectagile.webprojectagile.utils.JwtUtils;
-import lombok.AllArgsConstructor;
+import com.projectagile.webprojectagile.utils.RedisUtils;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,21 +25,26 @@ public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;
 
+    private RedisUtils redisUtils;
+
     @Autowired
-    private DefaulUserDetailsService defaulUserDetailsService;
+    private DefaultUserDetailsService defaultUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         String jwt = parseJwt(httpServletRequest);
         if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
-            String userEmail = jwtUtils.getUserEmailFromJwtToken(jwt);
-            UserDetails userDetails = defaulUserDetailsService.loadUserByUsername(userEmail);
-            System.out.println(userDetails.getAuthorities());
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-            authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String uid = jwtUtils.getUidFromJwtToken(jwt);
+            UserDetails userDetails = defaultUserDetailsService.loadUserByUid(uid);
+            if(redisUtils.hasKey(uid) && jwt.equals(redisUtils.get(uid))){
+                System.out.println(userDetails.getAuthorities());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+            } else {
+                httpServletRequest.getRequestDispatcher("/user/logout-success").forward(httpServletRequest, httpServletResponse );
+            }
         }
-
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 

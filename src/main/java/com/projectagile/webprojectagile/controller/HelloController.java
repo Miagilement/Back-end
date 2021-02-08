@@ -4,6 +4,7 @@ package com.projectagile.webprojectagile.controller;
 import com.projectagile.webprojectagile.entity.TestClass;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.impl.TestClassServiceImpl;
+import com.projectagile.webprojectagile.utils.RedisUtils;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import lombok.AllArgsConstructor;
@@ -21,6 +22,7 @@ import java.util.List;
 public class HelloController {
 
     TestClassServiceImpl testClassService;
+    RedisUtils redisUtils;
 
     @PostMapping("/hello")
     public String helloTest(){
@@ -73,4 +75,11 @@ public class HelloController {
             }
         }
     }
+
+    @PostMapping("/testRedis/{text}")
+    public BaseResVO testRedis(@PathVariable String text){
+        redisUtils.set("test",text,10000);
+        return ResultVOUtils.success(redisUtils.get("test"));
+    }
+
 }
