@@ -1,14 +1,10 @@
 package com.projectagile.webprojectagile.controller;
 
-import com.projectagile.webprojectagile.dao.ConfirmationTokenDao;
-import com.projectagile.webprojectagile.dao.IndividualDao;
-import com.projectagile.webprojectagile.dao.ProfileDao;
 import com.projectagile.webprojectagile.entity.ConfirmationToken;
 import com.projectagile.webprojectagile.entity.Enterprise;
 import com.projectagile.webprojectagile.entity.Individual;
 import com.projectagile.webprojectagile.entity.Profile;
 import com.projectagile.webprojectagile.enums.ResultEnum;
-import com.projectagile.webprojectagile.service.ProfileService;
 import com.projectagile.webprojectagile.service.impl.EmailServiceImpl;
 import com.projectagile.webprojectagile.service.impl.EnterpriseServiceImpl;
 import com.projectagile.webprojectagile.service.impl.IndividualServiceImpl;
@@ -21,7 +17,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -62,7 +57,7 @@ public class UserRegisterController {
             mailMessage.setTo(enterpriseReqVO.getEnterprise().getUserEmail());
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setText("Cliquez sur ce lien pour completer votre inscription : "
-                    +"http://localhost:8000/user/confirm-account?token="+confirmationToken.getConfirmationToken());
+                    + "http://localhost:8000/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
             emailService.sendEmail(mailMessage);
             return ResultVOUtils.success(enterprise);
         }
@@ -82,30 +77,16 @@ public class UserRegisterController {
             mailMessage.setTo(individualReqVO.getIndividual().getUserEmail());
             mailMessage.setSubject("Complete Registration!");
             mailMessage.setText("Cliquez sur ce lien pour completer votre inscription : "
-                    +"http://localhost:8000/user/confirm-account?token="+confirmationToken.getConfirmationToken());
+                    + "http://localhost:8000/user/confirm-account?token=" + confirmationToken.getConfirmationToken());
             emailService.sendEmail(mailMessage);
             return ResultVOUtils.success(individual);
         }
     }
 
-
-/*
-    SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo(userEntity.getEmailId());
-            mailMessage.setSubject("Complete Registration!");
-            mailMessage.setText("Cliquez sur ce lien pour completer votre inscription : "
-                    +"http://localhost:8080/confirm-account?token="+confirmationToken.getConfirmationToken());
-            emailService.sendEmail(mailMessage);
-            modelAndView.addObject("emailId", userEntity.getEmailId());
-            modelAndView.setViewName("successfulRegisteration");
- */
-
-    @RequestMapping(value="/confirm-account", method= {RequestMethod.GET, RequestMethod.POST})
-    public BaseResVO confirmUserAccount(@RequestParam("token") String confirmationToken)
-    {
+    @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET, RequestMethod.POST})
+    public BaseResVO confirmUserAccount(@RequestParam("token") String confirmationToken) {
         ConfirmationToken token = emailService.findToken(confirmationToken);
-        if(token != null)
-        {
+        if (token != null) {
             Profile user = profileService.findProfileByEmail(token.getProfile().getUserEmail());
             user.setEnabled(true);
             profileService.updateProfile(user);
