@@ -28,7 +28,7 @@ public class Enterprise extends Profile {
 
     private String groupAffiliated;
 
-    @NotNull(message = "Le secteur d'acitivité doit être choisi")
+    @NotNull(message = "Le secteur d'activité doit être choisi")
     private String sectorActivity;
 
     @NotNull(message = "Une région doit être selectionnée")
