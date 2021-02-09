@@ -1,7 +1,10 @@
 package com.projectagile.webprojectagile.dao;
 
 import com.projectagile.webprojectagile.entity.Profile;
+import com.projectagile.webprojectagile.entity.Role;
 import org.springframework.data.repository.CrudRepository;
+
+import java.util.Set;
 
 /**
  * Le Data Access Object sert à gérer la communication (CRUD) avec la BDD

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Override
     public Enterprise insertEnterprise(Enterprise enterprise) {
         enterprise.setUserPassword(BCrypt.hashpw(enterprise.getUserPassword(), BCrypt.gensalt()));
-        Set<Role> roles = new HashSet<>();
+        List<Role> roles = new ArrayList<>();
         roles.add(roleDao.findByRoleName(RoleList.USER_ENTERPRISE.getRoleName()));
         enterprise.setRoles(roles);
         System.out.println(enterprise.getUserPassword());

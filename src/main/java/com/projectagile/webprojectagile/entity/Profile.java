@@ -7,9 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * "Profile" est la classe mère de Enterprise et Individual
@@ -39,7 +37,7 @@ public class Profile implements Serializable {
     //Affectation d'un ou plusieurs roles à un profil
     @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER)
     @JoinTable(name = "user_role")
-    private Set<Role> roles = new HashSet<>();
+    private List<Role> roles = new ArrayList<>();
 
     public Profile() {
         this.uid = UUID.randomUUID().toString();
