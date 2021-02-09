@@ -2,11 +2,13 @@ package com.projectagile.webprojectagile.security;
 
 import com.projectagile.webprojectagile.utils.JwtUtils;
 import com.projectagile.webprojectagile.utils.RedisUtils;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;

@@ -59,22 +59,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(listLoginPathExclude).permitAll()
 //                .antMatchers(listPathExcludeNoAuthentication).permitAll()
 //                .antMatchers(listPathExcludeIndividual).hasAuthority("USER_INDIVIDUAL")
-                .anyRequest().authenticated()
-                .and().logout().logoutUrl("/user/logout").addLogoutHandler(new CustomLogoutHandler()).logoutSuccessHandler(new CustomLogoutSuccessHandler()).permitAll()
+//                .anyRequest().authenticated()
+                .and().logout().logoutUrl("/user/logout").addLogoutHandler(customLogoutHandlerBean()).logoutSuccessHandler(new CustomLogoutSuccessHandler()).permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and().exceptionHandling().authenticationEntryPoint(new AuthenticationEntryPoint() {
-                    @Override
-                    public void commence(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
-                        log.warn("Illegal request occurred, request to [{}], AuthenticationException='{}'", httpServletRequest.getRequestURI(), e.getMessage());
-                        httpServletRequest.getRequestDispatcher("/user/login-error").forward(httpServletRequest, httpServletResponse);
-                    }
+                .and().exceptionHandling().authenticationEntryPoint((httpServletRequest, httpServletResponse, e) -> {
+                    log.warn("Illegal request occurred, request to [{}], AuthenticationException='{}'", httpServletRequest.getRequestURI(), e.getMessage());
+                    httpServletRequest.getRequestDispatcher("/user/login-error").forward(httpServletRequest, httpServletResponse);
                 })
-                .accessDeniedHandler(new AccessDeniedHandler() {
-                    @Override
-                    public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
-                        log.warn("Access denied, request to [{}], AuthenticationException= '{}'", httpServletRequest.getRequestURI(), e.getMessage());
-                        httpServletRequest.getRequestDispatcher("/user/login-error").forward(httpServletRequest, httpServletResponse);
-                    }
+                .accessDeniedHandler((httpServletRequest, httpServletResponse, e) -> {
+                    log.warn("Access denied, request to [{}], AuthenticationException= '{}'", httpServletRequest.getRequestURI(), e.getMessage());
+                    httpServletRequest.getRequestDispatcher("/user/login-error").forward(httpServletRequest, httpServletResponse);
                 });
                 httpSecurity.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }
@@ -90,4 +84,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new AuthTokenFilter();
     }
 
+    @Bean
+    public CustomLogoutHandler customLogoutHandlerBean(){return new CustomLogoutHandler();}
 }
