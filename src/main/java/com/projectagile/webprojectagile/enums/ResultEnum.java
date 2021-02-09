@@ -22,7 +22,7 @@ public enum ResultEnum {
     USER_WRONG(8, "L'email ou mot de passe est incorrect!"),
     LOGIN_TIMEOUT(9, "Token is expired!"),
     USER_ALREADY_EXIST(9, "Cette adresse email est déjà utilisée!"),
-    USER_EMAIL_NOT(10, "Le lien ne marche pas!"),
+    USER_EMAIL_NOT(10, "Veuillez confirmer votre adresse mail avant vous vous connectez!"),
     ;
 
     private Integer code;

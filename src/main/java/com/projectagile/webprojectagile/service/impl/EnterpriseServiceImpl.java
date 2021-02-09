@@ -37,6 +37,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Override
     public Enterprise insertEnterprise(Enterprise enterprise) {
         enterprise.setUserPassword(BCrypt.hashpw(enterprise.getUserPassword(), BCrypt.gensalt()));
+        enterprise.setUserEmail(enterprise.getUserEmail().toLowerCase());
         List<Role> roles = new ArrayList<>();
         roles.add(roleDao.findByRoleName(RoleList.USER_ENTERPRISE.getRoleName()));
         enterprise.setRoles(roles);

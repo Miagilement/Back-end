@@ -13,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Implémentation de l'interface service
@@ -37,6 +34,7 @@ public class IndividualServiceImpl implements IndividualService {
     @Override
     public Individual insertIndividual(Individual individual) {
         individual.setUserPassword(BCrypt.hashpw(individual.getUserPassword(), BCrypt.gensalt()));
+        individual.setUserEmail(individual.getUserEmail().toLowerCase());
         List<Role> roles = new ArrayList<>();
         roles.add(roleDao.findByRoleName(RoleList.USER_INDIVIDUAL.getRoleName()));
         individual.setRoles(roles);

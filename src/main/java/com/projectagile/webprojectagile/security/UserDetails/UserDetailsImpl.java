@@ -22,6 +22,8 @@ public class UserDetailsImpl implements UserDetails {
 
     private String userPassword;
 
+    private boolean isEnable;
+
     private Collection<? extends GrantedAuthority> authorities;
 
     @Override
@@ -56,7 +58,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.isEnable;
     }
 
     public static UserDetailsImpl build(Profile profile) {
@@ -68,6 +70,7 @@ public class UserDetailsImpl implements UserDetails {
                 profile.getUid(),
                 profile.getUserEmail(),
                 profile.getUserPassword(),
+                profile.isEnabled(),
                 authorities);
     }
 }

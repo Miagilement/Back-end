@@ -5,6 +5,7 @@ import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -60,6 +61,12 @@ public class GlobalExceptionHandler {
     public BaseResVO handlerBadCredentialsException(BadCredentialsException e){
         log.warn(e.getMessage());
         return ResultVOUtils.error(ResultEnum.USER_WRONG);
+    }
+
+    @ExceptionHandler(value = DisabledException.class)
+    public BaseResVO handlerDisabledException(DisabledException e){
+        log.warn(e.getMessage());
+        return ResultVOUtils.error(ResultEnum.USER_EMAIL_NOT);
     }
 
 }
