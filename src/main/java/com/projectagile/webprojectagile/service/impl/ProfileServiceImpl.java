@@ -22,4 +22,13 @@ public class ProfileServiceImpl implements ProfileService {
     public void updateProfile(Profile profile) {
         profileDao.save(profile);
     }
+
+    @Override
+    public boolean isExistProfile(Profile profile) {
+        if(profileDao.findByUserEmail(profile.getUserEmail()) != null){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

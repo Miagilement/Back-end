@@ -56,13 +56,6 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     }
 
     @Override
-    public boolean isExistEnterprise(Enterprise enterprise) {
-        Enterprise enterpriseExist = enterpriseDao.findByUserEmailOrSiret(enterprise.getUserEmail(), enterprise.getSiret());
-        Individual individualExist = individualDao.findByUserEmail(enterprise.getUserEmail());
-        return enterpriseExist != null || individualExist != null;
-    }
-
-    @Override
     public List<Enterprise> findEnterpriseByAttribute(String region, String sector) {
         if(region.equals("any")&&sector.equals("any")){
             return (List<Enterprise>) enterpriseDao.findAll();

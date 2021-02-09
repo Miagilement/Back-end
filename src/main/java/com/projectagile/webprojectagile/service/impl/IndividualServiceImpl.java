@@ -34,7 +34,7 @@ public class IndividualServiceImpl implements IndividualService {
     @Override
     public Individual insertIndividual(Individual individual) {
         individual.setUserPassword(BCrypt.hashpw(individual.getUserPassword(), BCrypt.gensalt()));
-        individual.setUserEmail(individual.getUserEmail().toLowerCase());
+
         List<Role> roles = new ArrayList<>();
         roles.add(roleDao.findByRoleName(RoleList.USER_INDIVIDUAL.getRoleName()));
         individual.setRoles(roles);
@@ -49,13 +49,6 @@ public class IndividualServiceImpl implements IndividualService {
     @Override
     public Individual findIndividualById(String uid) {
         return individualDao.findById(uid).get();
-    }
-
-    @Override
-    public boolean isExistIndividual(Individual individual) {
-        Enterprise enterpriseExist = enterpriseDao.findByUserEmailOrSiret(individual.getUserEmail(), null);
-        Individual individualExist = individualDao.findByUserEmail(individual.getUserEmail());
-        return enterpriseExist != null || individualExist != null;
     }
 
     @Override

@@ -43,10 +43,10 @@ public class UserRegisterController {
 
     //Pour l'entreprise (lié au formulaire inscription entreprise)
     @PostMapping("/enterprise/register")
-
     public BaseResVO enterpriseRegister(@Valid @RequestBody EnterpriseReqVO enterpriseReqVO) {
         System.out.println(enterpriseReqVO);
-        if (enterpriseService.isExistEnterprise(enterpriseReqVO.getEnterprise())) {
+        enterpriseReqVO.getEnterprise().setUserEmail(enterpriseReqVO.getEnterprise().getUserEmail().toLowerCase());
+        if (profileService.isExistProfile(enterpriseReqVO.getEnterprise())) {
             String[] listString = {"Le SIRET ou email est déja inscrit, veuillez vous connecter directement!"};
             return ResultVOUtils.error(ResultEnum.DATA_REPEAT, listString);
         } else {
@@ -66,7 +66,8 @@ public class UserRegisterController {
     @PostMapping("/individual/register")
     public BaseResVO individualRegister(@Valid @RequestBody IndividualReqVO individualReqVO) {
         System.out.println(individualReqVO);
-            if (individualService.isExistIndividual(individualReqVO.getIndividual())) {
+        individualReqVO.getIndividual().setUserEmail(individualReqVO.getIndividual().getUserEmail().toLowerCase());
+            if (profileService.isExistProfile(individualReqVO.getIndividual())) {
                 String[] listString = {"L'utilisateur existe déja, veuillez vous connecter directement!"};
                 return ResultVOUtils.error(ResultEnum.DATA_REPEAT, listString);
             } else {
