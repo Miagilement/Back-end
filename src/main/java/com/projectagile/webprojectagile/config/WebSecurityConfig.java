@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(listLoginPathExclude).permitAll()
                 .antMatchers(listPathExcludeNoAuthentication).permitAll()
 //                .antMatchers(listPathExcludeIndividual).hasAuthority("USER_INDIVIDUAL")
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
                 .and().logout().logoutUrl("/user/logout").addLogoutHandler(customLogoutHandlerBean()).logoutSuccessHandler(new CustomLogoutSuccessHandler()).permitAll()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().exceptionHandling().authenticationEntryPoint((httpServletRequest, httpServletResponse, e) -> {

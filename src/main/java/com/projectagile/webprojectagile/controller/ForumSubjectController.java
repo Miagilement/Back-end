@@ -82,4 +82,9 @@ public class ForumSubjectController {
         tag = tag.toLowerCase();
         return ResultVOUtils.success(forumTagService.addTag(tag));
     }
+
+    @PostMapping("/find-all-tags")
+    public BaseResVO findAllTag(){
+        return ResultVOUtils.success(forumTagService.findAllTags());
+    }
 }
