@@ -1,9 +1,10 @@
 package com.projectagile.webprojectagile.dao;
 
-import com.projectagile.webprojectagile.entity.Enterprise;
 import com.projectagile.webprojectagile.entity.ForumSubject;
-import org.springframework.data.jpa.repository.Query;
+import com.projectagile.webprojectagile.entity.ForumTag;
 import org.springframework.data.repository.CrudRepository;
+
+import java.util.List;
 
 /**
  * Le Data Access Object sert à gérer la communication (CRUD) avec la BDD
@@ -12,4 +13,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 
 public interface ForumSubjectDao extends CrudRepository <ForumSubject, Integer> {
+
+    List<ForumSubject> findForumSubjectsByTagList(List<ForumTag> forumTagList);
 }

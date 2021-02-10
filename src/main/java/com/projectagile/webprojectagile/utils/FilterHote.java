@@ -25,8 +25,6 @@ public class FilterHote implements Filter {
    ServletResponse response, 
    FilterChain filterchain) 
       throws IOException, ServletException {
-      
-      
       System.out.println("Hote distant:"+request.getRemoteHost());
       System.out.println("Adresse distant:"+request.getRemoteAddr());
       filterchain.doFilter(request, response);// propagation de la requête le long de la chaîne

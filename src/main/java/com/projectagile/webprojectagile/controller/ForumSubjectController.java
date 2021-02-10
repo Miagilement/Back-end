@@ -4,6 +4,7 @@ package com.projectagile.webprojectagile.controller;
 import com.projectagile.webprojectagile.entity.ForumSubject;
 import com.projectagile.webprojectagile.enums.ResultEnum;
 import com.projectagile.webprojectagile.service.impl.ForumSubjectServiceImpl;
+import com.projectagile.webprojectagile.service.impl.ForumTagServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.ForumSubjectReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
@@ -25,6 +26,8 @@ import java.util.List;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 @Slf4j
 public class ForumSubjectController {
+
+    ForumTagServiceImpl forumTagService;
 
     ForumSubjectServiceImpl forumSubjectService;
 
@@ -72,5 +75,11 @@ public class ForumSubjectController {
     public BaseResVO deleteForumSubjectById(@PathVariable int id) {
         this.forumSubjectService.deleteForumSubjectById(id);
         return ResultVOUtils.success(null);
+    }
+
+    @PostMapping("/add-forum-tag/{tag}")
+    public BaseResVO addForumTag(@PathVariable String tag){
+        tag = tag.toLowerCase();
+        return ResultVOUtils.success(forumTagService.addTag(tag));
     }
 }

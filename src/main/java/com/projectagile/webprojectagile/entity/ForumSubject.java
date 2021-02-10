@@ -1,12 +1,11 @@
 package com.projectagile.webprojectagile.entity;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.UUID;
+import java.util.List;
 import java.util.Date;
 
 /**
@@ -24,6 +23,10 @@ public class ForumSubject {
     @Id
     @GeneratedValue
     private int id;
+
+    @ManyToMany(targetEntity = ForumTag.class, fetch = FetchType.EAGER)
+    @JoinTable(name="subject_tag")
+    private List<ForumTag> forumTagList;
 
     @NotNull(message = "Le titre du sujet dans le forum doit être renseigné")
     @Length(max = 70, message = "Le titre du sujet dans le forum ne doit pas dépasser 70 caractères")

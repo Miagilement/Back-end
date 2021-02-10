@@ -16,16 +16,16 @@ import javax.persistence.*;
 @Entity
 // définition d'une contraintre : le nom d'un role doit être unique (ne pas avoir de doublons)
 @Table(uniqueConstraints = { //
-                @UniqueConstraint(name = "TAG_FILTER_UNIQUE_CONSTRAINT", columnNames = "tag_Filter_Forum") })
+                @UniqueConstraint(name = "TAG_FILTER_UNIQUE_CONSTRAINT", columnNames = "tag_name") })
 
-public class FiltersTags {
+public class ForumTag {
      
     @Id
     @GeneratedValue
-    private Long tagFilterId;
+    private Long tagId;
 
-    @Column(name = "tag_Filter_Forum" ,nullable = false)
-    private String tagFilterForum;
+    @Column(name="tag_name", nullable = false)
+    private String tagName;
 
 }
 
