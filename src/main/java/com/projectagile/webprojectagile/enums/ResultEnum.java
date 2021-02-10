@@ -18,11 +18,11 @@ public enum ResultEnum {
     DATA_NOT(4, "No related data"),
     DATA_CHANGE(5, "Data no changed"),
     DATA_REPEAT(6, "Data is already existed"),
-    USER_NOT(7, "User does not exist"),
-    USER_WRONG(8, "L'email ou mot de passe est incorrect!"),
-    LOGIN_TIMEOUT(9, "Token is expired!"),
+    USER_NOT(7, "Aucun utilisateur enregistré avec cette adresse mail"),
+    USER_WRONG(8, "Le mot de passe est incorrect!"),
     USER_ALREADY_EXIST(9, "Cette adresse email est déjà utilisée!"),
-    USER_EMAIL_NOT(10, "Le lien ne marche pas!"),
+    USER_EMAIL_NOT(10, "Veuillez confirmer votre adresse mail avant d'essayer de vous connecter! Consultez votre boîte mail."),
+    LOGIN_TIMEOUT(11, "Token is expired!"),
     ;
 
     private Integer code;

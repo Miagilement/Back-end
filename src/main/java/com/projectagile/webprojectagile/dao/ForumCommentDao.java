@@ -18,5 +18,4 @@ public interface ForumCommentDao extends CrudRepository<ForumComment, Integer> {
     //Requete générée automatiquement par Hibernate
     //Equivalent à : @Query(value = "Select * from forum_comment as fc where fc.subject_id = ?1", nativeQuery = true)
     List<ForumComment> findBySubjectId(int subjectId);
-
 }

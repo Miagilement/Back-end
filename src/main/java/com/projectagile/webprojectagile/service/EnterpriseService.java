@@ -15,6 +15,5 @@ public interface EnterpriseService {
     Enterprise insertEnterprise(Enterprise enterprise);
     List<Enterprise> findAllEnterprise();
     Enterprise findByIdEnterprise(String uid);
-    boolean isExistEnterprise(Enterprise enterprise);
     List<Enterprise> findEnterpriseByAttribute(String region, String sector);
 }

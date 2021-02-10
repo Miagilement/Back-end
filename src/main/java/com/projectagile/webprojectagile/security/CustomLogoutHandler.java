@@ -28,7 +28,6 @@ public class CustomLogoutHandler implements LogoutHandler {
     public void logout(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) {
         String jwt = parseJwt(httpServletRequest);
         System.out.println(jwt);
-        System.out.println(jwtUtils.getUidFromJwtToken(jwt));
         if (jwt != null && jwtUtils.validateJwtToken(jwt)) {
             String uid = jwtUtils.getUidFromJwtToken(jwt);
             if (redisUtils.hasKey(uid) && jwt.equals(redisUtils.get(uid))) {

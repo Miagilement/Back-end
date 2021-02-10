@@ -70,6 +70,7 @@ public class UserLoginController {
 
     @PostMapping("/login")
     public BaseResVO login(@RequestBody UserLoginReqVO userLoginReqVO){
+        userLoginReqVO.setUserEmail(userLoginReqVO.getUserEmail().toLowerCase());
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(userLoginReqVO.getUserEmail(), userLoginReqVO.getUserPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);

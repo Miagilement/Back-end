@@ -37,6 +37,7 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Override
     public Enterprise insertEnterprise(Enterprise enterprise) {
         enterprise.setUserPassword(BCrypt.hashpw(enterprise.getUserPassword(), BCrypt.gensalt()));
+        enterprise.setUserEmail(enterprise.getUserEmail().toLowerCase());
         List<Role> roles = new ArrayList<>();
         roles.add(roleDao.findByRoleName(RoleList.USER_ENTERPRISE.getRoleName()));
         enterprise.setRoles(roles);
@@ -52,13 +53,6 @@ public class EnterpriseServiceImpl implements EnterpriseService {
     @Override
     public Enterprise findByIdEnterprise(String uid) {
         return enterpriseDao.findById(uid).get();
-    }
-
-    @Override
-    public boolean isExistEnterprise(Enterprise enterprise) {
-        Enterprise enterpriseExist = enterpriseDao.findByUserEmailOrSiret(enterprise.getUserEmail(), enterprise.getSiret());
-        Individual individualExist = individualDao.findByUserEmail(enterprise.getUserEmail());
-        return enterpriseExist != null || individualExist != null;
     }
 
     @Override
