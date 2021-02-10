@@ -70,6 +70,15 @@ public class ForumSubjectController {
             return ResultVOUtils.error();
         }
     }
+    @PostMapping("/find-forum-subject-by-titile/{title}")
+    public BaseResVO findForumSubjectByTitle(@PathVariable String title) {
+        ForumSubject forumSubject = this.forumSubjectService.findForumSubjectByTitle(title);
+        if (forumSubject != null) {
+            return ResultVOUtils.success(forumSubject);
+        } else {
+            return ResultVOUtils.error();
+        }
+    }
 
     @PostMapping("/delete-forum-subject-by-id/{id}")
     public BaseResVO deleteForumSubjectById(@PathVariable int id) {

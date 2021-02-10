@@ -16,6 +16,7 @@ public interface ForumSubjectService {
     ForumSubject insertForumSubject(ForumSubject forumSubject);
     ForumSubject updateForumSubject(ForumSubject forumSubject);
     ForumSubject findForumSubjectById(int id);
+    ForumSubject findForumSubjectByTitle(String title);
     void deleteForumSubjectById(int id);
 
 }

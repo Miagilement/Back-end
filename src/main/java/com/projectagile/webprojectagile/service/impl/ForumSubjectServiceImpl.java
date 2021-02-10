@@ -62,6 +62,10 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
     public ForumSubject findForumSubjectById(int id) {
         return forumSubjectDao.findById(id).get();
     }
+    @Override
+    public ForumSubject findForumSubjectByTitle(String title) {
+        return forumSubjectDao.findByTitle(title);
+    }
 
     @Override
     public void deleteForumSubjectById(int id) {

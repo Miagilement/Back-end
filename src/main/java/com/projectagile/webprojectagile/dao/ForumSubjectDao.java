@@ -13,6 +13,6 @@ import java.util.List;
  */
 
 public interface ForumSubjectDao extends CrudRepository <ForumSubject, Integer> {
-
+    ForumSubject findByTitle(String title);
     List<ForumSubject> findByForumTagList(ForumTag tag);
 }
