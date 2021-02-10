@@ -70,7 +70,7 @@ public class ForumSubjectController {
             return ResultVOUtils.error();
         }
     }
-    @PostMapping("/find-forum-subject-by-titile/{title}")
+    @PostMapping("/find-forum-subject-by-title/{title}")
     public BaseResVO findForumSubjectByTitle(@PathVariable String title) {
         ForumSubject forumSubject = this.forumSubjectService.findForumSubjectByTitle(title);
         if (forumSubject != null) {
