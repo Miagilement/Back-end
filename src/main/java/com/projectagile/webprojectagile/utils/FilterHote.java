@@ -13,9 +13,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FilterHote implements Filter {
-  /* @Override
-   public void destroy() {}
-*/
+  @Override
+   public void destroy() {
+// callback de destruction de ce filtre
+
+   }
+
    @Override
    public void doFilter
    (ServletRequest request, 
@@ -23,8 +26,9 @@ public class FilterHote implements Filter {
    FilterChain filterchain) 
       throws IOException, ServletException {
       
+      
       System.out.println("Hote distant:"+request.getRemoteHost());
       System.out.println("Adresse distant:"+request.getRemoteAddr());
-      filterchain.doFilter(request, response);
+      filterchain.doFilter(request, response);// propagation de la requête le long de la chaîne
    }
 }

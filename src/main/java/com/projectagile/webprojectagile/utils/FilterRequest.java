@@ -12,9 +12,9 @@ import javax.servlet.ServletResponse;
 
 @Component
 public class FilterRequest implements Filter {
- /* @Override
+ @Override
    public void destroy() {}
-*/ 
+
    @Override
    public void doFilter /*Envoie de la requete*/
       (ServletRequest request,
