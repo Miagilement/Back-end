@@ -39,9 +39,9 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
 
     @Override
     public ForumSubject insertForumSubject(ForumSubject forumSubject) {
-        List<ForumTag> tagList = new ArrayList<>();
-        forumSubject.getForumTagList().forEach(forumTag -> tagList.add(forumTagDao.findByTagName(forumTag.getTagName())));
-        forumSubject.setForumTagList(tagList);
+//        List<ForumTag> tagList = new ArrayList<>();
+//        forumSubject.getForumTagList().forEach(forumTag -> tagList.add(forumTagDao.findByTagName(forumTag.getTagName())));
+//        forumSubject.setForumTagList(tagList);
 
         String authorId = forumSubject.getAuthorId();
         switch ((profileDao.findById(authorId).get().getRoles().get(0).getRoleName())){
