@@ -7,13 +7,13 @@ import com.projectagile.webprojectagile.service.impl.ForumSubjectServiceImpl;
 import com.projectagile.webprojectagile.service.impl.ForumTagServiceImpl;
 import com.projectagile.webprojectagile.utils.ResultVOUtils;
 import com.projectagile.webprojectagile.vo.req.ForumSubjectReqVO;
+import com.projectagile.webprojectagile.vo.req.TagReqVO;
 import com.projectagile.webprojectagile.vo.res.BaseResVO;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -97,4 +97,10 @@ public class ForumSubjectController {
     public BaseResVO findAllTag(){
         return ResultVOUtils.success(forumTagService.findAllTags());
     }
+
+    @PostMapping("/find-by-tags")
+    public BaseResVO findByTag(@RequestBody TagReqVO tagReqVO){
+        return ResultVOUtils.success(forumSubjectService.findByTagList(tagReqVO.getTagList()));
+    }
+
 }

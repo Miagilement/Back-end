@@ -39,9 +39,15 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
 
     @Override
     public ForumSubject insertForumSubject(ForumSubject forumSubject) {
-//        List<ForumTag> tagList = new ArrayList<>();
-//        forumSubject.getForumTagList().forEach(forumTag -> tagList.add(forumTagDao.findByTagName(forumTag.getTagName())));
-//        forumSubject.setForumTagList(tagList);
+        List<ForumTag> tagList = new ArrayList<>();
+        forumSubject.getForumTagList().forEach(forumTag -> {
+            if(forumTag.getTagId()!=null){
+                tagList.add(forumTag);
+            } else {
+                tagList.add(forumTagDao.save(forumTag));
+            }
+        });
+        forumSubject.setForumTagList(tagList);
 
         String authorId = forumSubject.getAuthorId();
         switch ((profileDao.findById(authorId).get().getRoles().get(0).getRoleName())){
@@ -63,6 +69,8 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
         return forumSubjectDao.save(forumSubject1);
     }
 
+
+
     @Override
     public ForumSubject findForumSubjectById(int id) {
         return forumSubjectDao.findById(id).get();
@@ -80,5 +88,10 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
     @Override
     public void deleteForumSubjectById(int id) {
         forumSubjectDao.deleteById(id);
+    }
+
+    @Override
+    public List<ForumSubject> findByTagList(List<ForumTag> tagList) {
+        return forumSubjectDao.findByForumTagListIsIn(tagList);
     }
 }

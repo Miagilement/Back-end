@@ -18,4 +18,6 @@ public interface ForumSubjectDao extends CrudRepository <ForumSubject, Integer> 
     List<ForumSubject> findByTitleContains(String title);
 
     ForumSubject findByTitle(String title);
+
+    List<ForumSubject> findByForumTagListIsIn(List<ForumTag> tagList);
 }

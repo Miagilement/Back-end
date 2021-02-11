@@ -1,6 +1,7 @@
 package com.projectagile.webprojectagile.service;
 
 import com.projectagile.webprojectagile.entity.ForumSubject;
+import com.projectagile.webprojectagile.entity.ForumTag;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,5 +20,6 @@ public interface ForumSubjectService {
     ForumSubject findForumSubjectByTitle(String title);
     List<ForumSubject> searchSubjectByTitle(String title);
     void deleteForumSubjectById(int id);
+    List<ForumSubject> findByTagList(List<ForumTag> tagList);
 
 }
