@@ -43,6 +43,7 @@ public class ForumSubjectController {
 
     @PostMapping("/add-forum-subject")
     public BaseResVO addForumSubject(@RequestBody ForumSubjectReqVO forumSubjectReqVO) {
+        System.out.println(forumSubjectReqVO.getForumSubject());
         ForumSubject forumSubject = this.forumSubjectService.insertForumSubject(forumSubjectReqVO.getForumSubject());
         if (forumSubject != null) {
             return ResultVOUtils.success(forumSubject);
@@ -72,9 +73,9 @@ public class ForumSubjectController {
     }
     @PostMapping("/find-forum-subject-by-title/{title}")
     public BaseResVO findForumSubjectByTitle(@PathVariable String title) {
-        ForumSubject forumSubject = this.forumSubjectService.findForumSubjectByTitle(title);
-        if (forumSubject != null) {
-            return ResultVOUtils.success(forumSubject);
+        List<ForumSubject> listSubject = this.forumSubjectService.searchSubjectByTitle(title);
+        if (listSubject != null) {
+            return ResultVOUtils.success(listSubject);
         } else {
             return ResultVOUtils.error();
         }

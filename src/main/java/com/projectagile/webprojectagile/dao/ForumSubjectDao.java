@@ -13,6 +13,9 @@ import java.util.List;
  */
 
 public interface ForumSubjectDao extends CrudRepository <ForumSubject, Integer> {
-    ForumSubject findByTitle(String title);
     List<ForumSubject> findByForumTagList(ForumTag tag);
+
+    List<ForumSubject> findByTitleContains(String title);
+
+    ForumSubject findByTitle(String title);
 }

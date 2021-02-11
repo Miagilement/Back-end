@@ -1,15 +1,14 @@
 package com.projectagile.webprojectagile.service.impl;
 
-import com.projectagile.webprojectagile.dao.EnterpriseDao;
-import com.projectagile.webprojectagile.dao.ForumSubjectDao;
-import com.projectagile.webprojectagile.dao.IndividualDao;
-import com.projectagile.webprojectagile.dao.ProfileDao;
+import com.projectagile.webprojectagile.dao.*;
 import com.projectagile.webprojectagile.entity.ForumSubject;
+import com.projectagile.webprojectagile.entity.ForumTag;
 import com.projectagile.webprojectagile.service.ForumSubjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -31,6 +30,8 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
 
     EnterpriseDao enterpriseDao;
 
+    ForumTagDao forumTagDao;
+
     @Override
     public List<ForumSubject> findAllForumSubject(){
         return (List<ForumSubject>) forumSubjectDao.findAll();
@@ -38,6 +39,10 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
 
     @Override
     public ForumSubject insertForumSubject(ForumSubject forumSubject) {
+        List<ForumTag> tagList = new ArrayList<>();
+        forumSubject.getForumTagList().forEach(forumTag -> tagList.add(forumTagDao.findByTagName(forumTag.getTagName())));
+        forumSubject.setForumTagList(tagList);
+
         String authorId = forumSubject.getAuthorId();
         switch ((profileDao.findById(authorId).get().getRoles().get(0).getRoleName())){
             case "USER_ENTERPRISE":
@@ -65,6 +70,11 @@ public class ForumSubjectServiceImpl implements ForumSubjectService {
     @Override
     public ForumSubject findForumSubjectByTitle(String title) {
         return forumSubjectDao.findByTitle(title);
+    }
+
+    @Override
+    public List<ForumSubject> searchSubjectByTitle(String title) {
+        return forumSubjectDao.findByTitleContains(title);
     }
 
     @Override
